@@ -14,12 +14,13 @@ Number:22
 Name  :Masaya Taniguchi
 e-mail:mack.sept.public@gmail.com
 
-Last Change: 10-Jul-2013.
+Last Change: 16-Jul-2013.
 */
 #ifndef LAND_H
 #define LAND_H
 
 #include "Road.hpp"
+#include "Signal.hpp"
 #include<QString>
 #include<QVector>
 struct Land {
@@ -27,5 +28,6 @@ struct Land {
 		void load();
 		QString str;
 		QVector<Road> road;
+		QVector<Signal> signal;
 };
 #endif

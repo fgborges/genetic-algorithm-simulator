@@ -8,9 +8,8 @@
 #include"defines.hpp"
 static int miss = 1;
 static int goal = 1;
+static long long int worldtime;
 Navi::Navi(Land *ptr):land_ptr(ptr)
-{
-}
 {
 }
 bool destribute(const QPoint& p,const QPoint& q)
@@ -161,4 +160,12 @@ void Navi::CarMove(QVector<Car>::iterator car)
 /**/		}
 /**/	}
 /****************************************************************************************************/
+QVector<Signal>::const_iterator s_citr;
+for(s_citr=land_ptr->signal.constBegin();s_citr!=land_ptr->signal.constEnd();++s_citr){
+		if(s_citr->p()==car->p()){
+			if(s_citr->getSignal(worldtime)!=car->R_ObjNum()){
+				car->setD(QPoint(0,0));
+			}
+		}
+}
 }

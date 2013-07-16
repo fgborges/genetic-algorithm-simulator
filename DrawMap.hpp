@@ -14,7 +14,7 @@ Number:22
 Name  :Masaya Taniguchi
 e-mail:mack.sept.public@gmail.com
 
-Last Change: 13-Jul-2013.
+Last Change: 16-Jul-2013.
 */
 #ifndef DRAWMAP_HPP
 #define DRAWMAP_HPP
@@ -31,7 +31,8 @@ class DrawMap : public QWidget{
 	Q_OBJECT
 	public:
 		DrawMap(QWidget *parent=0);
-		void Init(); //initiarazation of car
+		void Init_Car(); //initiarazation of car
+		void Init_Signal();
 	public slots:
 		void onTimer();
 	protected:

@@ -37,10 +37,10 @@ class Object{
 		QLine l() const;
 		QPoint& rp();
 		QLine& rl();
-		long long int ObjNum()const;
+		int ObjNum()const;
 	private:
 		QPoint point;
 		QLine line;
-		long long int ObjectNumber;
+		int ObjectNumber;
 };
 #endif

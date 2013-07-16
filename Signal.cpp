@@ -9,8 +9,11 @@ Signal::Signal(int x,int y):Object(x,y)
 Signal::Signal():Object()
 {
 }
-
-bool Signal::sig(int ck)
+void Signal::AppendPattern(int ObjectNumber)
 {
-	return signal_pattern[ck];
+	R_ObjNum.append(ObjectNumber);
+}
+int Signal::getSignal(int ck)const
+{
+	return R_ObjNum.at(ck%R_ObjNum.size());
 }

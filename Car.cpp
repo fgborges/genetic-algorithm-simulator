@@ -47,11 +47,11 @@ bool Car::first()const
 	else
 		return false;
 }
-void Car::hasObjNum(long long int n)
+void Car::hasObjNum(int n)
 {
 	RoadObjectNumber = n;
 }
-long long int Car::R_ObjNum()const
+int Car::R_ObjNum()const
 {
 	return RoadObjectNumber;
 }

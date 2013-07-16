@@ -32,17 +32,17 @@ class Car : public Object {
 		void move();
 		QPoint dest()const;
 		bool first()const;
-		void hasObjNum(long long int);
+		void hasObjNum(int);
 		void set_maindest(const QPoint&);
 		QPoint maindest()const;
-		long long int R_ObjNum()const;
+		int R_ObjNum()const;
 
 		QVector<QPoint> log;
 		bool sbmod;
 	private:
 		QPoint d;
 		QPoint destination;
-		long long int RoadObjectNumber;
+		int RoadObjectNumber;
 		QPoint main_destination;
 };
 #endif

@@ -3,14 +3,17 @@
 #include<QDebug>
 #include"Normal.hpp"
 #include"defines.hpp"
+static long long int worldtime;
 DrawMap::DrawMap(QWidget *parent):QWidget(parent),land("data.txt"),navi(&land)
 {
 	timer = new QTimer();
-	Init();
+	Init_Signal();
+	worldtime=1;
+	Init_Car();
 	connect(timer,SIGNAL(timeout()),this,SLOT(onTimer()));
 	timer->start(20);
 }
-void DrawMap::Init()
+void DrawMap::Init_Car()
 {
 	qsrand(QTime::currentTime().msec());
 	for(int i = 0; i < CAR_NUMBER ; i++){
@@ -18,6 +21,21 @@ void DrawMap::Init()
 		qDebug()<<"Generated Car"<<tmp.p().x()<<tmp.p().y();
 		car.append(tmp);
 	}
+}
+void DrawMap::Init_Signal()
+{
+	qsrand(1);
+	QVector<Signal>::iterator s_itr;
+	QVector<Road>::const_iterator r_citr;
+	QVector<int>::const_iterator t_citr;
+	for(s_itr=land.signal.begin();s_itr!=land.signal.end();++s_itr){
+		QVector<int> tmp;
+		for(r_citr=land.road.constBegin();r_citr!=land.road.constEnd();++r_citr)
+			if(s_itr->p()==r_citr->l().p1())tmp.append(r_citr->ObjNum());
+		for(t_citr=tmp.constBegin();t_citr!=tmp.constEnd();++t_citr)
+			s_itr->AppendPattern(static_cast<int>(*t_citr));
+	}
+	qDebug()<<__FILE__<<__LINE__;
 }
 void DrawMap::paintEvent(QPaintEvent*)
 {
@@ -46,5 +64,6 @@ void DrawMap::onTimer()
 	QVector<Car>::iterator c_itr;
 	for(c_itr=car.begin();c_itr!=car.end();++c_itr)
 		navi.CarMove(c_itr); // turn on navi
+	worldtime++;
 	update();
 }

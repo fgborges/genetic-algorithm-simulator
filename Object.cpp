@@ -1,6 +1,6 @@
 #include"Object.hpp"
 #include<QDebug>
-static long long int g_ObjNum = 0;
+static int g_ObjNum = 0;
 int g_mkObjNum()
 {
 	g_ObjNum++;
@@ -73,7 +73,7 @@ QPoint& Object::rp()
 {
 	return point;
 }
-long long int Object::ObjNum()const
+int Object::ObjNum()const
 {
 	return ObjectNumber;
 }
