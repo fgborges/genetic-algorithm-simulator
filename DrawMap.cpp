@@ -3,12 +3,10 @@
 #include<QDebug>
 #include"Normal.hpp"
 #include"defines.hpp"
-static long long int worldtime;
 DrawMap::DrawMap(QWidget *parent):QWidget(parent),land("data.txt"),navi(&land)
 {
 	timer = new QTimer();
 	Init_Signal();
-	worldtime=1;
 	Init_Car();
 	connect(timer,SIGNAL(timeout()),this,SLOT(onTimer()));
 	timer->start(20);
@@ -64,6 +62,5 @@ void DrawMap::onTimer()
 	QVector<Car>::iterator c_itr;
 	for(c_itr=car.begin();c_itr!=car.end();++c_itr)
 		navi.CarMove(c_itr); // turn on navi
-	worldtime++;
 	update();
 }
