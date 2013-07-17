@@ -11,8 +11,6 @@ static int goal = 1;
 Navi::Navi(Land *ptr):land_ptr(ptr)
 {
 }
-{
-}
 bool destribute(const QPoint& p,const QPoint& q)
 {
 	QPoint d=p-q;
