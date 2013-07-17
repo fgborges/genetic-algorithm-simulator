@@ -25,13 +25,12 @@ void DrawMap::Init_Signal()
 	qsrand(1);
 	QVector<Signal>::iterator s_itr;
 	QVector<Road>::const_iterator r_citr;
-	QVector<int>::const_iterator t_citr;
+	qDebug()<<__FILE__<<__LINE__;
 	for(s_itr=land.signal.begin();s_itr!=land.signal.end();++s_itr){
 		QVector<int> tmp;
 		for(r_citr=land.road.constBegin();r_citr!=land.road.constEnd();++r_citr)
 			if(s_itr->p()==r_citr->l().p1())tmp.append(r_citr->ObjNum());
-		for(t_citr=tmp.constBegin();t_citr!=tmp.constEnd();++t_citr)
-			s_itr->AppendPattern(static_cast<int>(*t_citr));
+			s_itr->AppendPattern(tmp);
 	}
 	qDebug()<<__FILE__<<__LINE__;
 }

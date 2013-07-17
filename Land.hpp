@@ -14,7 +14,7 @@ Number:22
 Name  :Masaya Taniguchi
 e-mail:mack.sept.public@gmail.com
 
-Last Change: 16-Jul-2013.
+Last Change: 17-Jul-2013.
 */
 #ifndef LAND_H
 #define LAND_H

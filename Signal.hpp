@@ -14,7 +14,7 @@ Number:22
 Name  :Masaya Taniguchi
 e-mail:mack.sept.public@gmail.com
 
-Last Change: 16-Jul-2013.
+Last Change: 17-Jul-2013.
 */
 #ifndef SIGNAL_HPP
 #define SIGNAL_HPP
@@ -27,9 +27,8 @@ class Signal : public Object{
 		Signal(const QPoint&);
 		Signal(int,int);
 		Signal();
-		void AppendPattern(int);
-		int getSignal(int) const;
-	private:
-		QVector<int> R_ObjNum;
+		void AppendPattern(QVector<int>);
+		bool getSignal(long long int,int) const;
+		QVector< QVector<int> > R_ObjNum;
 };
 #endif
