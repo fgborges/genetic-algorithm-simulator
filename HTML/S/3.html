@@ -5,13 +5,13 @@
 <meta name='generator' content='GLOBAL-5.7.1'>
 </head>
 <body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
-<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/26.html'>src</a>/main.cc</h2>
-<i><font color='green'>/* [&lt;][&gt;]<a href='#L20'>[^]</a>[v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/27.html'>src</a>/main.cc</h2>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L19'>[^]</a>[v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
 <hr>
 <h2>DEFINITIONS</h2>
 This source file includes following definitions.
 <ol>
-<li><a href='#L20' title='Defined at 20.'>main</a>
+<li><a href='#L19' title='Defined at 19.'>main</a>
 </ol>
 <hr>
 <pre>
@@ -33,29 +33,28 @@ This source file includes following definitions.
 <a name='L16'><font color='darkred'>#include</font>&lt;QPushButton&gt;
 <a name='L17'><font color='darkred'>#include</font>&lt;QDial&gt;
 <a name='L18'><font color='darkred'>#include</font>&lt;QLCDNumber&gt;
-<a name='L19'>
-<a name='L20'><b>int</b> main(<b>int</b> argc,<b>char</b> **argv)
-<a name='L21'><font color='red'>{</font>
-<a name='L22'>    QApplication app(argc,argv);
-<a name='L23'>    Draw* draw;
-<a name='L24'>    QPushButton* resetButton = <b>new</b> QPushButton("reset");
-<a name='L25'>    QDial* dial = <b>new</b> QDial();
-<a name='L26'>    QLCDNumber* LCD=<b>new</b> QLCDNumber();
-<a name='L27'>    <b>if</b>(argc==4)draw = <b>new</b> Draw(argv[1],atoi(argv[2]),argv[3]);
-<a name='L28'>    <b>else</b> <b>if</b>(argc==3)draw = <b>new</b> Draw(argv[1],atoi(argv[2]));
-<a name='L29'>    <b>else</b> <b>if</b>(argc==2)draw = <b>new</b> Draw(argv[1]);
-<a name='L30'>    draw-&gt;show();
-<a name='L31'>    QObject::connect(resetButton,SIGNAL(clicked()),draw,SLOT(<a href='../S/5.html#L284' title='Defined at 284 in src/draw.cc.'>reset</a>()));
-<a name='L32'>    QObject::connect(dial,SIGNAL(valueChanged(<b>int</b>)),draw,SLOT(<a href='../S/5.html#L289' title='Defined at 289 in src/draw.cc.'>change_speed</a>(<b>int</b>)));
-<a name='L33'>    QObject::connect(draw,SIGNAL(evalChanged(<b>int</b>)),LCD,SLOT(display(<b>int</b>)));
-<a name='L34'>    resetButton-&gt;show();
+<a name='L19'><b>int</b> main(<b>int</b> argc,<b>char</b> **argv)
+<a name='L20'><font color='red'>{</font>
+<a name='L21'>    QApplication app(argc,argv);
+<a name='L22'>    Draw* draw;
+<a name='L23'>    QPushButton* resetButton = <b>new</b> QPushButton("reset");
+<a name='L24'>    QDial* dial = <b>new</b> QDial();
+<a name='L25'>    QLCDNumber* LCD=<b>new</b> QLCDNumber();
+<a name='L26'>    <b>if</b>(argc==4)draw = <b>new</b> Draw(argv[1],atoi(argv[2]),argv[3]);
+<a name='L27'>    <b>else</b> <b>if</b>(argc==3)draw = <b>new</b> Draw(argv[1],atoi(argv[2]));
+<a name='L28'>    <b>else</b> <b>if</b>(argc==2)draw = <b>new</b> Draw(argv[1]);
+<a name='L29'>    QObject::connect(resetButton,SIGNAL(clicked()),draw,SLOT(<a href='../S/5.html#L257' title='Defined at 257 in src/draw.cc.'>reset</a>()));
+<a name='L30'>    QObject::connect(dial,SIGNAL(valueChanged(<b>int</b>)),draw,SLOT(<a href='../S/5.html#L262' title='Defined at 262 in src/draw.cc.'>change_speed</a>(<b>int</b>)));
+<a name='L31'>    QObject::connect(draw,SIGNAL(evalChanged(<b>int</b>)),LCD,SLOT(display(<b>int</b>)));
+<a name='L32'>    draw-&gt;show();
+<a name='L33'>    resetButton-&gt;show();
+<a name='L34'>    LCD-&gt;show();
 <a name='L35'>    dial-&gt;show();
-<a name='L36'>    LCD-&gt;show();
-<a name='L37'>    <b>return</b> app.exec();
-<a name='L38'><font color='red'>}</font>
+<a name='L36'>    <b>return</b> app.exec();
+<a name='L37'><font color='red'>}</font>
 </pre>
 <hr>
 <a name='BOTTOM'>
-<i><font color='green'>/* [&lt;][&gt;][^]<a href='#L20'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<i><font color='green'>/* [&lt;][&gt;][^]<a href='#L19'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
 </body>
 </html>

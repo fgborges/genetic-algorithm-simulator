@@ -1,44 +1,51 @@
 <html>
 <head>
-<title>src/GA/individual.h</title>
+<title>src/GA/population.h</title>
 <meta name='robots' content='noindex,nofollow'>
 <meta name='generator' content='GLOBAL-5.7.1'>
 </head>
 <body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
-<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/26.html'>src</a>/<a href='../files/27.html'>GA</a>/individual.h</h2>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/27.html'>src</a>/<a href='../files/28.html'>GA</a>/population.h</h2>
 <i><font color='green'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
 <hr>
-<h2><a href='../J/6.html' title='Multiple included from 6 places.'>INCLUDED FROM</a></h2>
+<h2><a href='../J/10.html' title='Multiple included from 7 places.'>INCLUDED FROM</a></h2>
 <hr>
 <pre>
-<a name='L1'><i><font color='green'>/****************************************</font></i>
+<a name='L1'><i><font color='green'>/**************************************** </font></i>
 <a name='L2'><i><font color='green'> *  Author: MackRick.</font></i>
 <a name='L3'><i><font color='green'> *   Email: mack.sept.public@gmail.com.</font></i>
-<a name='L4'><i><font color='green'> *    File: individual.h.</font></i>
+<a name='L4'><i><font color='green'> *    File: population.h.</font></i>
 <a name='L5'><i><font color='green'> * Project: /home/mackrick/beta1/src/GA.</font></i>
 <a name='L6'><i><font color='green'> *  Coding: en_US.UTF-8.</font></i>
-<a name='L7'><i><font color='green'> * Summary: 個体クラスです。染色体クラスを</font></i>
-<a name='L8'><i><font color='green'> * 　　　　 継承し実際にアルゴリズムでは</font></i>
-<a name='L9'><i><font color='green'> * 　　　　 こちらからデータを操作してもら</font></i>
-<a name='L10'><i><font color='green'> * 　　　   もらうことになります。</font></i>
-<a name='L11'><i><font color='green'> * Last Change: 12-Sep-2013.</font></i>
-<a name='L12'><i><font color='green'> ****************************************/</font></i>
-<a name='L13'><font color='darkred'>#ifndef</font> <a href='../S/18.html#L14' title='Defined at 14 in src/GA/individual.h.'>INDIVIDUAL_H</a>
-<a name='L14'><font color='darkred'>#define</font> <a href='../S/18.html#L13' title='Refered from 13 in src/GA/individual.h.'>INDIVIDUAL_H</a>
-<a name='L15'><font color='darkred'>#include</font>"<a href='13.html'>chromosome.h</a>"
-<a name='L16'>class <a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a> : public <a href='../S/10.html#L17' title='Defined at 17 in src/GA/chromosome.cpp.'>Chromosome</a>
-<a name='L17'><font color='red'>{</font>
-<a name='L18'>        public:
-<a name='L19'>                <a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>(<b>int</b> num=0);
-<a name='L20'>                <b>int</b> <a href='../S/19.html#L17' title='Defined at 17 in src/GA/individual.cpp.'>getEval</a>()<b>const</b>;
-<a name='L21'>                <b>void</b> <a href='../S/19.html#L22' title='Defined at 22 in src/GA/individual.cpp.'>setEval</a>(<b>int</b>);
-<a name='L22'>                bool operator==(<b>const</b> <a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>&amp;)<b>const</b>;
-<a name='L23'>                bool operator&gt;(<b>const</b> <a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>&amp;)<b>const</b>;
-<a name='L24'>                bool operator&lt;(<b>const</b> <a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>&amp;)<b>const</b>;
-<a name='L25'>        private:
-<a name='L26'>                <b>int</b> eval;
-<a name='L27'><font color='red'>}</font>;
-<a name='L28'><font color='darkred'>#endif</font>
+<a name='L7'><i><font color='green'> * Summary: </font></i>
+<a name='L8'><i><font color='green'> * Last Change: 12-Sep-2013.</font></i>
+<a name='L9'><i><font color='green'> ****************************************/</font></i>
+<a name='L10'><font color='darkred'>#ifndef</font> <a href='../S/18.html#L11' title='Defined at 11 in src/GA/population.h.'>POPLATION_H</a>
+<a name='L11'><font color='darkred'>#define</font> <a href='../S/18.html#L10' title='Refered from 10 in src/GA/population.h.'>POPLATION_H</a>
+<a name='L12'><font color='darkred'>#include</font>"<a href='19.html'>src/GA/individual.h</a>"
+<a name='L13'><font color='darkred'>#include</font>&lt;QVector&gt;
+<a name='L14'>class Population
+<a name='L15'><font color='red'>{</font>
+<a name='L16'>        public:
+<a name='L17'>                <i><font color='green'>//Constructor</font></i>
+<a name='L18'>                Population(<b>int</b> <a href='../S/4.html#L16' title='Defined at 16 in src/car.cc.'>num</a>);
+<a name='L19'>                <i><font color='green'>//MainFunction</font></i>
+<a name='L20'>                <b>void</b> <a href='../S/15.html#L12' title='Defined at 12 in src/GA/method.cc.'>method</a>();
+<a name='L21'>                <a href='../S/20.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>&amp; <a href='../D/31.html' title='Multiple defined in 2 places.'>at</a>(<b>int</b> i);
+<a name='L22'>                QVector&lt;<a href='../S/20.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>&gt;::iterator <a href='../D/33.html' title='Multiple defined in 3 places.'>begin</a>();
+<a name='L23'>        private:
+<a name='L24'>                <i><font color='green'>//Function</font></i>
+<a name='L25'>                <b>void</b> <a href='../S/17.html#L5' title='Defined at 5 in src/GA/clossover.cc.'>ClossOver</a>();
+<a name='L26'>                <b>void</b> <a href='../S/10.html#L11' title='Defined at 11 in src/GA/selectver3.05.cc.'>Select</a>();
+<a name='L27'>                <b>void</b> <a href='../S/16.html#L5' title='Defined at 5 in src/GA/mutate.cc.'>Mutate</a>();
+<a name='L28'>                <i><font color='green'>//Value</font></i>
+<a name='L29'>                QVector&lt;<a href='../S/20.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>&gt; indiv;
+<a name='L30'>                <i><font color='green'>//configuration</font></i>
+<a name='L31'>                <b>const</b> <b>int</b> gene_max;
+<a name='L32'>                <b>const</b> <b>int</b> IndivNum;
+<a name='L33'>                <b>const</b> <b>int</b> <a href='../S/13.html#L15' title='Defined at 15 in src/GA/population.cc.'>LossNum</a>;
+<a name='L34'><font color='red'>}</font>;
+<a name='L35'><font color='darkred'>#endif</font>
 </pre>
 <hr>
 <a name='BOTTOM'>

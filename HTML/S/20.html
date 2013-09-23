@@ -1,84 +1,62 @@
 <html>
 <head>
-<title>src/land.cc</title>
+<title>src/GA/individual.cpp</title>
 <meta name='robots' content='noindex,nofollow'>
 <meta name='generator' content='GLOBAL-5.7.1'>
 </head>
 <body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
-<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/26.html'>src</a>/land.cc</h2>
-<i><font color='green'>/* [&lt;][&gt;]<a href='#L22'>[^]</a>[v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/27.html'>src</a>/<a href='../files/28.html'>GA</a>/individual.cpp</h2>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L17'>[^]</a><a href='#L22'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
 <hr>
 <h2>DEFINITIONS</h2>
 This source file includes following definitions.
 <ol>
-<li><a href='#L22' title='Defined at 22.'>get_random_id</a>
+<li><a href='#L17' title='Defined at 17.'>getEval</a>
+<li><a href='#L22' title='Defined at 22.'>setEval</a>
 </ol>
 <hr>
 <pre>
 <a name='L1'><i><font color='green'>/****************************************</font></i>
 <a name='L2'><i><font color='green'> *  Author: MackRick.</font></i>
 <a name='L3'><i><font color='green'> *   Email: mack.sept.public@gmail.com.</font></i>
-<a name='L4'><i><font color='green'> *    File: land.cc.</font></i>
-<a name='L5'><i><font color='green'> * Project: /home/mackrick/program/school/TMP.</font></i>
-<a name='L6'><i><font color='green'> *  Coding: en_US.UTF-8.</font></i>
+<a name='L4'><i><font color='green'> *    File: individual.cpp.</font></i>
+<a name='L5'><i><font color='green'> * Project: /home/mackrick/beta1/src/GA.</font></i>
+<a name='L6'><i><font color='green'> *  Coding: ja_JP.UTF-8.</font></i>
 <a name='L7'><i><font color='green'> * Summary:</font></i>
-<a name='L8'><i><font color='green'> * Last Change: 10-Sep-2013.</font></i>
+<a name='L8'><i><font color='green'> * Last Change: 12-Sep-2013.</font></i>
 <a name='L9'><i><font color='green'> ****************************************/</font></i>
-<a name='L10'>
-<a name='L11'><font color='darkred'>#include</font> "<a href='22.html'>land.h</a>"
-<a name='L12'><font color='darkred'>#include</font>&lt;QFile&gt;
-<a name='L13'><font color='darkred'>#include</font>&lt;QIODevice&gt;
-<a name='L14'><font color='darkred'>#include</font>&lt;QDebug&gt;
-<a name='L15'><font color='darkred'>#include</font>&lt;QList&gt;
-<a name='L16'><font color='darkred'>#include</font>&lt;QTextStream&gt;
-<a name='L17'><font color='darkred'>#include</font>&lt;QPointF&gt;
-<a name='L18'><font color='darkred'>#include</font>&lt;QString&gt;
-<a name='L19'><font color='darkred'>#include</font>&lt;QStringList&gt;
-<a name='L20'><font color='darkred'>#include</font>&lt;QtGlobal&gt;
+<a name='L10'><font color='darkred'>#include</font>"<a href='19.html'>src/GA/individual.h</a>"
+<a name='L11'>
+<a name='L12'><a href='../R/11.html' title='Multiple refered from 25 places.'>Individual</a>::<a href='../S/20.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a> (<b>int</b> num)
+<a name='L13'>  :Chromosome(num)
+<a name='L14'><font color='red'>{</font>
+<a name='L15'><font color='red'>}</font>
+<a name='L16'>
+<a name='L17'><b>int</b> <a href='../S/20.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>::<a href='../R/36.html' title='Multiple refered from 2 places.'>getEval</a> ()<b>const</b>
+<a name='L18'><font color='red'>{</font>
+<a name='L19'>  <b>return</b> eval;
+<a name='L20'><font color='red'>}</font>
 <a name='L21'>
-<a name='L22'><b>int</b> <a href='../D/14.html' title='Multiple defined in 2 places.'>Land</a>::<a href='../R/40.html' title='Multiple refered from 4 places.'>get_random_id</a>()<b>const</b>
+<a name='L22'><b>void</b> <a href='../S/20.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>::<a href='../R/61.html' title='Multiple refered from 2 places.'>setEval</a> (<b>int</b> eval)
 <a name='L23'><font color='red'>{</font>
-<a name='L24'>    <b>return</b> road.keys().<a href='../D/29.html' title='Multiple defined in 2 places.'>at</a>(qrand()%road.<a href='../S/8.html#L36' title='Defined at 36 in src/signal.cc.'>size</a>());
+<a name='L24'>  <b>this</b>-&gt;eval = eval;
 <a name='L25'><font color='red'>}</font>
-<a name='L26'><a href='../R/14.html' title='Multiple refered from 4 places.'>Land</a>::<a href='../D/14.html' title='Multiple defined in 2 places.'>Land</a>(<b>const</b> QString&amp; filename)
-<a name='L27'><font color='red'>{</font>
-<a name='L28'>
-<a name='L29'>    QFile f(filename);
-<a name='L30'>    <b>if</b>(!f.open(QIODevice::ReadOnly | QIODevice::Text))
-<a name='L31'>        <font color='red'>{</font>
-<a name='L32'>            qDebug()&lt;&lt;"error";
-<a name='L33'>            <b>return</b>;
-<a name='L34'>        <font color='red'>}</font>
-<a name='L35'>    QTextStream in(&amp;f);
-<a name='L36'>    QString buf;
-<a name='L37'>    QPointF tmp,tmp2;
-<a name='L38'>    <b>int</b> key=1;
-<a name='L39'>    <b>while</b>(!in.atEnd())
-<a name='L40'>        <font color='red'>{</font>
-<a name='L41'>            buf = in.readLine();
-<a name='L42'>            qDebug()&lt;&lt;buf;
-<a name='L43'>            QStringList list = buf.split(",");
-<a name='L44'>            <b>if</b>(list.<a href='../D/29.html' title='Multiple defined in 2 places.'>at</a>(0)=="road")
-<a name='L45'>                <font color='red'>{</font>
-<a name='L46'>                    tmp.setX(list.<a href='../D/29.html' title='Multiple defined in 2 places.'>at</a>(1).toInt());
-<a name='L47'>                    tmp.setY(list.<a href='../D/29.html' title='Multiple defined in 2 places.'>at</a>(2).toInt());
-<a name='L48'>                    tmp2.setX(list.<a href='../D/29.html' title='Multiple defined in 2 places.'>at</a>(3).toInt());
-<a name='L49'>                    tmp2.setY(list.<a href='../D/29.html' title='Multiple defined in 2 places.'>at</a>(4).toInt());
-<a name='L50'>                    road.insert(key,QLineF(tmp,tmp2));
-<a name='L51'>                    key++;
-<a name='L52'>                <font color='red'>}</font>
-<a name='L53'>            <b>else</b> <b>if</b>(list.<a href='../D/29.html' title='Multiple defined in 2 places.'>at</a>(0)=="signal")
-<a name='L54'>                <font color='red'>{</font>
-<a name='L55'>                    tmp.setX(list.<a href='../D/29.html' title='Multiple defined in 2 places.'>at</a>(1).toInt());
-<a name='L56'>                    tmp.setY(list.<a href='../D/29.html' title='Multiple defined in 2 places.'>at</a>(2).toInt());
-<a name='L57'>                    <a href='../S/8.html#L15' title='Defined at 15 in src/signal.cc.'>Signal</a> s(tmp.x(),tmp.y());
-<a name='L58'>                    signal.append(s);
-<a name='L59'>                <font color='red'>}</font>
-<a name='L60'>        <font color='red'>}</font>
-<a name='L61'><font color='red'>}</font>
+<a name='L26'>
+<a name='L27'><b>bool</b> <a href='../S/20.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>::<b>operator</b> == (<b>const</b> Individual&amp; i)<b>const</b>
+<a name='L28'><font color='red'>{</font>
+<a name='L29'>  <b>return</b> <b>this</b>-&gt;eval == i.eval;
+<a name='L30'><font color='red'>}</font>
+<a name='L31'><b>bool</b> <a href='../S/20.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>::<b>operator</b> &gt; (<b>const</b> Individual&amp; i)<b>const</b>
+<a name='L32'><font color='red'>{</font>
+<a name='L33'>  <b>return</b> <b>this</b>-&gt;eval &gt; i.eval;
+<a name='L34'><font color='red'>}</font>
+<a name='L35'><b>bool</b> <a href='../S/20.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>::<b>operator</b> &lt; (<b>const</b> Individual&amp; i)<b>const</b>
+<a name='L36'><font color='red'>{</font>
+<a name='L37'>  <b>return</b> <b>this</b>-&gt;eval &lt; i.eval;
+<a name='L38'><font color='red'>}</font>
 </pre>
 <hr>
 <a name='BOTTOM'>
-<i><font color='green'>/* [&lt;][&gt;][^]<a href='#L22'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L17'>[^]</a><a href='#L22'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
 </body>
 </html>

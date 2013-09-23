@@ -1,15 +1,23 @@
 <html>
 <head>
-<title>get_rect</title>
+<title>get_pos</title>
 <meta name='robots' content='noindex,nofollow'>
 <meta name='generator' content='GLOBAL-5.7.1'>
 </head>
 <body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
 <pre>
-<a href='../S/21.html#L35'>get_rect</a>           35 src/car.h          const QRectF&amp; get_rect()const;
-<a href='../S/5.html#L138'>get_rect</a>          138 src/draw.cc          qDebug()&lt;&lt;"|size :"&lt;&lt;tmp.get_rect();
-<a href='../S/5.html#L191'>get_rect</a>          191 src/draw.cc          rect_pos=c.get_rect();
-<a href='../S/7.html#L82'>get_rect</a>           82 src/navi.cc    #define REGION(car) (car).get_rect().height()+(car).get_speed()
+<a href='../S/22.html#L31'>get_pos</a>            31 src/car.h          const QPointF&amp; get_pos()const;
+<a href='../S/5.html#L114'>get_pos</a>           114 src/draw.cc          qDebug()&lt;&lt;"|pos  :"&lt;&lt;tmp.get_pos();
+<a href='../S/5.html#L167'>get_pos</a>           167 src/draw.cc          rect_pos.moveCenter (c.get_pos ()+QPointF(d.y(),-d.x())*road_range/2);
+<a href='../S/5.html#L211'>get_pos</a>           211 src/draw.cc          c.moveTo (c.get_pos () + c.get_diff ());
+<a href='../S/5.html#L218'>get_pos</a>           218 src/draw.cc    	  if (c.get_pos () == c.get_dest ())
+<a href='../S/7.html#L59'>get_pos</a>            59 src/navi.cc          if (r.value().first.p1() == c.get_pos ()	&amp;&amp;
+<a href='../S/7.html#L62'>get_pos</a>            62 src/navi.cc    	  line.setP1 (c.get_pos());
+<a href='../S/7.html#L88'>get_pos</a>            88 src/navi.cc      return len(car.get_pos(),road.p2()) &lt; (len(QPointF(0,0),car.get_diff())+3);
+<a href='../S/7.html#L99'>get_pos</a>            99 src/navi.cc    	  (len(c.get_pos(),itr-&gt;get_pos()) &lt; REGION(c)))
+<a href='../S/7.html#L107'>get_pos</a>           107 src/navi.cc    	  (len (c.get_pos (),itr-&gt;get_pos()) &lt; REGION(c) )	&amp;&amp;
+<a href='../S/7.html#L108'>get_pos</a>           108 src/navi.cc    	  (InPDT (c.get_pos(),ROAD (c.get_road_id()).p2(),itr-&gt;get_pos())&lt;0))
+<a href='../S/7.html#L122'>get_pos</a>           122 src/navi.cc          if (len (QPointF (itr-&gt;x (),itr-&gt;y ()),car.get_pos ())&lt;7)
 </pre>
 </body>
 </html>

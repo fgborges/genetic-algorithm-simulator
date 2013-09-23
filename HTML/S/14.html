@@ -1,43 +1,48 @@
 <html>
 <head>
-<title>src/GA/method.cc</title>
+<title>src/GA/chromosome.h</title>
 <meta name='robots' content='noindex,nofollow'>
 <meta name='generator' content='GLOBAL-5.7.1'>
 </head>
 <body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
-<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/26.html'>src</a>/<a href='../files/27.html'>GA</a>/method.cc</h2>
-<i><font color='green'>/* [&lt;][&gt;]<a href='#L12'>[^]</a>[v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/27.html'>src</a>/<a href='../files/28.html'>GA</a>/chromosome.h</h2>
+<i><font color='green'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
 <hr>
-<h2>DEFINITIONS</h2>
-This source file includes following definitions.
-<ol>
-<li><a href='#L12' title='Defined at 12.'>method</a>
-</ol>
+<h2><a href='../J/2.html' title='Multiple included from 4 places.'>INCLUDED FROM</a></h2>
 <hr>
 <pre>
 <a name='L1'><i><font color='green'>/****************************************</font></i>
 <a name='L2'><i><font color='green'> *  Author: MackRick.</font></i>
 <a name='L3'><i><font color='green'> *   Email: mack.sept.public@gmail.com.</font></i>
-<a name='L4'><i><font color='green'> *    File: method.cc.</font></i>
+<a name='L4'><i><font color='green'> *    File: chromosome.h.</font></i>
 <a name='L5'><i><font color='green'> * Project: /home/mackrick/beta1/src/GA.</font></i>
 <a name='L6'><i><font color='green'> *  Coding: en_US.UTF-8.</font></i>
-<a name='L7'><i><font color='green'> * Summary:</font></i>
-<a name='L8'><i><font color='green'> * Last Change: 12-Sep-2013.</font></i>
-<a name='L9'><i><font color='green'> ****************************************/</font></i>
-<a name='L10'><font color='darkred'>#include</font>"<a href='17.html'>population.h</a>"
-<a name='L11'><font color='darkred'>#include</font> &lt;QDebug&gt;
-<a name='L12'><b>void</b> Population::<a href='../R/48.html' title='Multiple refered from 2 places.'>method</a>()
-<a name='L13'><font color='red'>{</font>
-<a name='L14'>        qDebug()&lt;&lt;"CALL SELECT()";
-<a name='L15'>        <b>this</b>-&gt;<a href='../S/9.html#L11' title='Defined at 11 in src/GA/selectver3.05.cc.'>Select</a>();
-<a name='L16'>        qDebug()&lt;&lt;"CALL CLOSSOVER()";
-<a name='L17'>        <b>this</b>-&gt;<a href='../S/16.html#L5' title='Defined at 5 in src/GA/clossover.cc.'>ClossOver</a>();
-<a name='L18'>        qDebug()&lt;&lt;"CALL MUTATE()";
-<a name='L19'>        <b>this</b>-&gt;<a href='../S/15.html#L5' title='Defined at 5 in src/GA/mutate.cc.'>Mutate</a>();
-<a name='L20'><font color='red'>}</font>
+<a name='L7'><i><font color='green'> *</font></i>
+<a name='L8'><i><font color='green'> * Summary: 染色体クラスです。Vectorを使う</font></i>
+<a name='L9'><i><font color='green'> * 　　　　 ことで個体のシュミレーションの</font></i>
+<a name='L10'><i><font color='green'> * 　　　　 幅を可変にしています。</font></i>
+<a name='L11'><i><font color='green'> *</font></i>
+<a name='L12'><i><font color='green'> * Last Change: 12-Sep-2013.</font></i>
+<a name='L13'><i><font color='green'> ****************************************/</font></i>
+<a name='L14'><font color='darkred'>#pragma</font> once
+<a name='L15'><font color='darkred'>#include</font>&lt;QVector&gt;
+<a name='L16'>
+<a name='L17'><b>typedef</b> QVector&lt;bool&gt; <a href='../R/8.html' title='Multiple refered from 14 places.'>Gene</a>;
+<a name='L18'>
+<a name='L19'>class <a href='../S/11.html#L17' title='Defined at 17 in src/GA/chromosome.cpp.'>Chromosome</a> 
+<a name='L20'><font color='red'>{</font>
+<a name='L21'> public:
+<a name='L22'>  <a href='../S/11.html#L17' title='Defined at 17 in src/GA/chromosome.cpp.'>Chromosome</a>(<b>int</b> <a href='../S/4.html#L16' title='Defined at 16 in src/car.cc.'>num</a>);
+<a name='L23'>  <b>const</b> <a href='../S/14.html#L17' title='Defined at 17 in src/GA/chromosome.h.'>Gene</a>&amp; <a href='../D/31.html' title='Multiple defined in 2 places.'>at</a>(<b>int</b> i)<b>const</b>;
+<a name='L24'>  QVector&lt;<a href='../S/14.html#L17' title='Defined at 17 in src/GA/chromosome.h.'>Gene</a>&gt;::iterator <a href='../D/33.html' title='Multiple defined in 3 places.'>begin</a>();
+<a name='L25'>  QVector&lt;<a href='../S/14.html#L17' title='Defined at 17 in src/GA/chromosome.h.'>Gene</a>&gt;::iterator <a href='../D/36.html' title='Multiple defined in 2 places.'>end</a>();
+<a name='L26'>  <b>void</b> <a href='../S/11.html#L60' title='Defined at 60 in src/GA/chromosome.cpp.'>push_back</a>(<a href='../S/14.html#L17' title='Defined at 17 in src/GA/chromosome.h.'>Gene</a> g);
+<a name='L27'> private:
+<a name='L28'>  QVector&lt;<a href='../S/14.html#L17' title='Defined at 17 in src/GA/chromosome.h.'>Gene</a>&gt; gene;
+<a name='L29'><font color='red'>}</font>;       
 </pre>
 <hr>
 <a name='BOTTOM'>
-<i><font color='green'>/* [&lt;][&gt;][^]<a href='#L12'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<i><font color='green'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
 </body>
 </html>

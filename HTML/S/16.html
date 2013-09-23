@@ -1,47 +1,59 @@
 <html>
 <head>
-<title>src/GA/clossover.cc</title>
+<title>src/GA/mutate.cc</title>
 <meta name='robots' content='noindex,nofollow'>
 <meta name='generator' content='GLOBAL-5.7.1'>
 </head>
 <body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
-<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/26.html'>src</a>/<a href='../files/27.html'>GA</a>/clossover.cc</h2>
-<i><font color='green'>/* [&lt;][&gt;]<a href='#L5'>[^]</a>[v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/27.html'>src</a>/<a href='../files/28.html'>GA</a>/mutate.cc</h2>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L5'>[^]</a><a href='#L15'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
 <hr>
 <h2>DEFINITIONS</h2>
 This source file includes following definitions.
 <ol>
-<li><a href='#L5' title='Defined at 5.'>ClossOver</a>
+<li><a href='#L5' title='Defined at 5.'>Mutate</a>
+<li><a href='#L15' title='Defined at 15.'>NewGene</a>
 </ol>
 <hr>
 <pre>
-<a name='L1'><font color='darkred'>#include</font>"<a href='17.html'>src/GA/population.h</a>"
-<a name='L2'><font color='darkred'>#include</font>"<a href='18.html'>src/GA/individual.h</a>"
+<a name='L1'><font color='darkred'>#include</font>"<a href='18.html'>src/GA/population.h</a>"
+<a name='L2'><font color='darkred'>#include</font>"<a href='19.html'>src/GA/individual.h</a>"
 <a name='L3'><font color='darkred'>#include</font>&lt;QVector&gt;
-<a name='L4'><font color='darkred'>#include</font>&lt;QDebug&gt;
-<a name='L5'><b>void</b> Population::<a href='../R/6.html' title='Multiple refered from 2 places.'>ClossOver</a>()
-<a name='L6'><font color='red'>{</font>
-<a name='L7'>  QVector&lt;<a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>&gt;::iterator indiv1,indiv2;
-<a name='L8'>  QVector&lt;<a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>&gt; NewGenelation;
-<a name='L9'>  <b>for</b>(indiv1=indiv.<a href='../D/31.html' title='Multiple defined in 3 places.'>begin</a>();indiv1!=indiv.<a href='../D/34.html' title='Multiple defined in 2 places.'>end</a>();++indiv1)<font color='red'>{</font>
-<a name='L10'>  <b>for</b>(indiv2=indiv.<a href='../D/31.html' title='Multiple defined in 3 places.'>begin</a>();indiv2!=indiv.<a href='../D/34.html' title='Multiple defined in 2 places.'>end</a>();++indiv2)<font color='red'>{</font>
-<a name='L11'>    <a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a> result(0);
-<a name='L12'>    <b>for</b>(<b>int</b> i=0;i&lt;gene_max;i++)
-<a name='L13'>      <b>if</b>(qrand()%2)
-<a name='L14'>        result.<a href='../S/10.html#L60' title='Defined at 60 in src/GA/chromosome.cpp.'>push_back</a>(indiv1-&gt;<a href='../D/29.html' title='Multiple defined in 2 places.'>at</a>(i));
-<a name='L15'>      <b>else</b>
-<a name='L16'>        result.<a href='../S/10.html#L60' title='Defined at 60 in src/GA/chromosome.cpp.'>push_back</a>(indiv2-&gt;<a href='../D/29.html' title='Multiple defined in 2 places.'>at</a>(i));
-<a name='L17'>    NewGenelation.<a href='../S/10.html#L60' title='Defined at 60 in src/GA/chromosome.cpp.'>push_back</a>(result);
-<a name='L18'>  <font color='red'>}</font><font color='red'>}</font>
-<a name='L19'>  indiv.clear();
-<a name='L20'>  <b>for</b>(indiv1=NewGenelation.<a href='../D/31.html' title='Multiple defined in 3 places.'>begin</a>();indiv1!=NewGenelation.<a href='../D/34.html' title='Multiple defined in 2 places.'>end</a>();++indiv1)
-<a name='L21'>    indiv.<a href='../S/10.html#L60' title='Defined at 60 in src/GA/chromosome.cpp.'>push_back</a>(*indiv1);
-<a name='L22'>  <b>return</b>;
-<a name='L23'><font color='red'>}</font>
-<a name='L24'>      
+<a name='L4'><a href='../S/14.html#L17' title='Defined at 17 in src/GA/chromosome.h.'>Gene</a> <a href='../S/16.html#L15' title='Defined at 15 in src/GA/mutate.cc.'>NewGene</a>();
+<a name='L5'><b>void</b> Population::<a href='../R/16.html' title='Multiple refered from 2 places.'>Mutate</a>()<font color='red'>{</font>
+<a name='L6'>  QVector&lt;<a href='../S/20.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>&gt;::iterator itr;
+<a name='L7'>  QVector&lt;<a href='../S/14.html#L17' title='Defined at 17 in src/GA/chromosome.h.'>Gene</a>&gt;::iterator itr2;
+<a name='L8'>  <b>for</b>(itr=indiv.<a href='../D/33.html' title='Multiple defined in 3 places.'>begin</a>();itr!=indiv.<a href='../D/36.html' title='Multiple defined in 2 places.'>end</a>();++itr)
+<a name='L9'>    <b>if</b>(qrand()%50==0)
+<a name='L10'>      <b>for</b>(itr2=itr-&gt;<a href='../D/33.html' title='Multiple defined in 3 places.'>begin</a>();itr2!=itr-&gt;<a href='../D/36.html' title='Multiple defined in 2 places.'>end</a>();++itr2)
+<a name='L11'>    <b>if</b>(qrand()%10)
+<a name='L12'>      *itr2=<a href='../S/16.html#L15' title='Defined at 15 in src/GA/mutate.cc.'>NewGene</a>();
+<a name='L13'>   <b>return</b>;
+<a name='L14'><font color='red'>}</font>
+<a name='L15'><a href='../S/14.html#L17' title='Defined at 17 in src/GA/chromosome.h.'>Gene</a> <a href='../R/17.html' title='Multiple refered from 2 places.'>NewGene</a>()
+<a name='L16'><font color='red'>{</font>
+<a name='L17'>  <b>int</b> key;
+<a name='L18'>  <a href='../S/14.html#L17' title='Defined at 17 in src/GA/chromosome.h.'>Gene</a> tmp;
+<a name='L19'>  tmp.clear();
+<a name='L20'>  <b>int</b> j;
+<a name='L21'>      key = qrand()%4+2;
+<a name='L22'>      <b>for</b>(j = 0; j&lt;key;j++)<font color='red'>{</font>
+<a name='L23'>                <b>if</b>(key%2)
+<a name='L24'>                        tmp.<a href='../S/11.html#L60' title='Defined at 60 in src/GA/chromosome.cpp.'>push_back</a>(<b>true</b>);
+<a name='L25'>                <b>else</b>
+<a name='L26'>                        tmp.<a href='../S/11.html#L60' title='Defined at 60 in src/GA/chromosome.cpp.'>push_back</a>(<b>false</b>);
+<a name='L27'>          <font color='red'>}</font>
+<a name='L28'>      <b>for</b>(j = 0; j&lt;8-key;j++)<font color='red'>{</font>
+<a name='L29'>                <b>if</b>(key%2)
+<a name='L30'>                        tmp.<a href='../S/11.html#L60' title='Defined at 60 in src/GA/chromosome.cpp.'>push_back</a>(<b>false</b>);
+<a name='L31'>                <b>else</b>
+<a name='L32'>                        tmp.<a href='../S/11.html#L60' title='Defined at 60 in src/GA/chromosome.cpp.'>push_back</a>(<b>true</b>);
+<a name='L33'>      <font color='red'>}</font>
+<a name='L34'>          <b>return</b> tmp;
+<a name='L35'><font color='red'>}</font>
 </pre>
 <hr>
 <a name='BOTTOM'>
-<i><font color='green'>/* [&lt;][&gt;][^]<a href='#L5'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L5'>[^]</a><a href='#L15'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
 </body>
 </html>

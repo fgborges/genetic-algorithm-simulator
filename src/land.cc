@@ -20,20 +20,18 @@
 #include<QtGlobal>
 int nrand()
 {
-  int sum;
+  int sum=0;
   for(int i = 0;i<12;i++)
     sum+=qrand();
   sum-=6;
   return sum;
 }
-
 int Land::get_random_id()const
 {
   return road.keys().at(nrand()%road.keys().size());
 }
 Land::Land(const QString& filename)
 {
-
   QFile f(filename);
   if(!f.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -57,7 +55,7 @@ Land::Land(const QString& filename)
 	  tmp.setY(list.at(2).toInt());
 	  tmp2.setX(list.at(3).toInt());
 	  tmp2.setY(list.at(4).toInt());
-	  for (auto r : this->road)
+	  for (auto& r : this->road)
 	    {
 	      if (r.first == QLineF(tmp,tmp2))
 		{

@@ -5,7 +5,7 @@
 <meta name='generator' content='GLOBAL-5.7.1'>
 </head>
 <body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
-<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/26.html'>src</a>/draw.h</h2>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/27.html'>src</a>/draw.h</h2>
 <i><font color='green'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
 <hr>
 <h2><a href='../J/15.html' title='Multiple included from 3 places.'>INCLUDED FROM</a></h2>
@@ -21,12 +21,12 @@
 <a name='L8'><i><font color='green'> * Last Change: 12-Sep-2013.</font></i>
 <a name='L9'><i><font color='green'> ****************************************/</font></i>
 <a name='L10'><font color='darkred'>#pragma</font> once
-<a name='L11'><font color='darkred'>#include</font> "<a href='22.html'>src/land.h</a>"
-<a name='L12'><font color='darkred'>#include</font> "<a href='21.html'>src/car.h</a>"
+<a name='L11'><font color='darkred'>#include</font> "<a href='23.html'>src/land.h</a>"
+<a name='L12'><font color='darkred'>#include</font> "<a href='22.html'>src/car.h</a>"
 <a name='L13'><font color='darkred'>#include</font>&lt;QWidget&gt;
 <a name='L14'><font color='darkred'>#include</font>&lt;QVector&gt;
-<a name='L15'><font color='darkred'>#include</font>"<a href='17.html'>src/GA/population.h</a>"
-<a name='L16'><font color='darkred'>#include</font> "<a href='18.html'>src/GA/individual.h</a>"
+<a name='L15'><font color='darkred'>#include</font>"<a href='18.html'>src/GA/population.h</a>"
+<a name='L16'><font color='darkred'>#include</font> "<a href='19.html'>src/GA/individual.h</a>"
 <a name='L17'>class Draw : public QWidget
 <a name='L18'><font color='red'>{</font>
 <a name='L19'>    Q_OBJECT
@@ -38,39 +38,41 @@
 <a name='L25'>signals:
 <a name='L26'>    <b>void</b> evalChanged(<b>int</b>);
 <a name='L27'>public slots:
-<a name='L28'>    <b>void</b> <a href='../S/5.html#L230' title='Defined at 230 in src/draw.cc.'>onTimer</a>();
-<a name='L29'>    <b>void</b> <a href='../S/5.html#L284' title='Defined at 284 in src/draw.cc.'>reset</a>();
-<a name='L30'>    <b>void</b> <a href='../S/5.html#L280' title='Defined at 280 in src/draw.cc.'>onTimer2</a>();
-<a name='L31'>    <b>void</b> <a href='../S/5.html#L289' title='Defined at 289 in src/draw.cc.'>change_speed</a>(<b>int</b> speed);
+<a name='L28'>    <b>void</b> <a href='../S/5.html#L206' title='Defined at 206 in src/draw.cc.'>onTimer</a>();
+<a name='L29'>    <b>void</b> <a href='../S/5.html#L257' title='Defined at 257 in src/draw.cc.'>reset</a>();
+<a name='L30'>    <b>void</b> <a href='../S/5.html#L253' title='Defined at 253 in src/draw.cc.'>onTimer2</a>();
+<a name='L31'>    <b>void</b> <a href='../S/5.html#L262' title='Defined at 262 in src/draw.cc.'>change_speed</a>(<b>int</b> speed);
 <a name='L32'>protected:
-<a name='L33'>    <b>void</b> <a href='../S/5.html#L173' title='Defined at 173 in src/draw.cc.'>paintEvent</a>(QPaintEvent*);
+<a name='L33'>    <b>void</b> <a href='../S/5.html#L147' title='Defined at 147 in src/draw.cc.'>paintEvent</a>(QPaintEvent*);
 <a name='L34'>private:
 <a name='L35'>    <i><font color='green'>//CarMoviAction</font></i>
-<a name='L36'>    <b>void</b> <a href='../S/7.html#L35' title='Defined at 35 in src/navi.cc.'>SetDiff</a>(Car&amp; car,<b>const</b> QLineF&amp; road);
-<a name='L37'>    <b>void</b> <a href='../S/7.html#L42' title='Defined at 42 in src/navi.cc.'>SetNextRoad</a>(Car&amp; car);
-<a name='L38'>    <b>void</b> <a href='../S/7.html#L79' title='Defined at 79 in src/navi.cc.'>smartAssist</a>(Car&amp; car);
-<a name='L39'>    <b>void</b> <a href='../S/7.html#L107' title='Defined at 107 in src/navi.cc.'>CheckSignal</a>(Car&amp; car,<b>long</b> <b>long</b> <b>int</b> l_line);
-<a name='L40'>    bool <a href='../S/7.html#L75' title='Defined at 75 in src/navi.cc.'>Reach</a>(<b>const</b> Car&amp; car,<b>const</b> QLineF&amp; road)<b>const</b>;
+<a name='L36'>    <b>void</b> <a href='../S/7.html#L35' title='Defined at 35 in src/navi.cc.'>SetDiff</a>(Car&amp; car,<b>const</b> <a href='../S/23.html#L21' title='Defined at 21 in src/land.h.'>QLineF</a>&amp; road);
+<a name='L37'>    <b>void</b> <a href='../S/7.html#L50' title='Defined at 50 in src/navi.cc.'>SetNextRoad</a>(Car&amp; car);
+<a name='L38'>    <b>void</b> <a href='../S/7.html#L90' title='Defined at 90 in src/navi.cc.'>smartAssist</a>(Car&amp; car);
+<a name='L39'>    <b>void</b> <a href='../S/7.html#L117' title='Defined at 117 in src/navi.cc.'>CheckSignal</a>(Car&amp; car,<b>long</b> <b>long</b> <b>int</b> l_line);
+<a name='L40'>    bool <a href='../S/7.html#L86' title='Defined at 86 in src/navi.cc.'>Reach</a>(<b>const</b> Car&amp; car,<b>const</b> <a href='../S/23.html#L21' title='Defined at 21 in src/land.h.'>QLineF</a>&amp; road)<b>const</b>;
 <a name='L41'>    <i><font color='green'>//Evaluate</font></i>
-<a name='L42'>    <b>int</b> <a href='../S/5.html#L222' title='Defined at 222 in src/draw.cc.'>Evaluate</a>();
+<a name='L42'>    <b>int</b> <a href='../S/5.html#L198' title='Defined at 198 in src/draw.cc.'>Evaluate</a>();
 <a name='L43'>    <i><font color='green'>//Initialized funciton;</font></i>
-<a name='L44'>    <b>void</b> <a href='../S/5.html#L118' title='Defined at 118 in src/draw.cc.'>InitCar</a>();
-<a name='L45'>    <b>void</b> <a href='../S/5.html#L146' title='Defined at 146 in src/draw.cc.'>InitSignal</a>(<a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>&amp; indiv);
-<a name='L46'>    <i><font color='green'>//menber</font></i>
-<a name='L47'>    QTimer *timer,*timer2;
-<a name='L48'>    <a href='../D/14.html' title='Multiple defined in 2 places.'>Land</a> land;
-<a name='L49'>    QVector&lt;QLineF&gt; map;
-<a name='L50'>    <b>const</b> QString img;
-<a name='L51'>    QVector&lt;Car&gt; car;
-<a name='L52'>    <b>const</b> <b>int</b> car_number;
-<a name='L53'>    <b>unsigned</b> <b>long</b> <b>long</b> g_clock;
-<a name='L54'>    Population *pop;
-<a name='L55'>    <b>int</b> <a href='../S/5.html#L104' title='Defined at 104 in src/draw.cc.'>index</a>;
-<a name='L56'>    <b>int</b> RoadNum;
-<a name='L57'>    <b>int</b> CAR_SIZE;
-<a name='L58'>    <b>int</b> CarNum;
-<a name='L59'><font color='red'>}</font>;
-<a name='L60'>
+<a name='L44'>    <b>void</b> <a href='../S/5.html#L97' title='Defined at 97 in src/draw.cc.'>InitCar</a>();
+<a name='L45'>    <b>void</b> <a href='../S/5.html#L124' title='Defined at 124 in src/draw.cc.'>InitSignal</a>(<a href='../S/20.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>&amp; indiv);
+<a name='L46'>    <i><font color='green'>//count Function</font></i>
+<a name='L47'>    <b>int</b> <a href='../S/7.html#L43' title='Defined at 43 in src/navi.cc.'>Count_car</a>(<b>int</b> key);
+<a name='L48'>    <i><font color='green'>//menber</font></i>
+<a name='L49'>    QTimer *timer,*timer2;
+<a name='L50'>    <a href='../D/14.html' title='Multiple defined in 2 places.'>Land</a> land;
+<a name='L51'>    QVector&lt;<a href='../S/23.html#L21' title='Defined at 21 in src/land.h.'>QLineF</a>&gt; map;
+<a name='L52'>    <b>const</b> QString img;
+<a name='L53'>    QVector&lt;Car&gt; car;
+<a name='L54'>    <b>const</b> <b>int</b> car_number;
+<a name='L55'>    <b>unsigned</b> <b>long</b> <b>long</b> g_clock;
+<a name='L56'>    Population *pop;
+<a name='L57'>    <b>int</b> <a href='../S/5.html#L82' title='Defined at 82 in src/draw.cc.'>index</a>;
+<a name='L58'>    <b>int</b> RoadNum;
+<a name='L59'>    <b>int</b> CAR_SIZE;
+<a name='L60'>    <b>int</b> CarNum;
+<a name='L61'><font color='red'>}</font>;
+<a name='L62'>
 </pre>
 <hr>
 <a name='BOTTOM'>

@@ -30,7 +30,6 @@ inline QPointF SignalPos(const QLineF& line)
   QPointF	pos;
   qreal		r;
   r=-qAtan2(road_range,l);
-
   vec/=vec.manhattanLength();
   pos.rx()=line.p1().x()+(qSqrt(road_range*road_range/4+l*l)*(vec.x()*qCos(r)-vec.y()*qSin(r)));
   pos.ry()=line.p1().y()+(qSqrt(road_range*road_range/4+l*l)*(vec.x()*qSin(r)+vec.y()*qCos(r)));
@@ -63,8 +62,8 @@ QVector<QLineF> multiline (const QHash<int,Road>& l)
       diff *= 5;
       for (int j=0;j<i.second;j++)
 	{
-	  line.setP1 (i.first.p1()-diff*(j+1));
- 	  line.setP2 (i.first.p2()-diff*(j+1));
+	  line.setP1 (i.first.p1()-diff*(2*j+1));
+ 	  line.setP2 (i.first.p2()-diff*(2*j+1));
 	  tmp.push_back (line);
 	}
     }
@@ -83,7 +82,6 @@ Draw::Draw(QString	filename,
 {
   InitCar();
   pop	 = new  Population(land.countSignal());
-  qDebug()<<land.countSignal();
   InitSignal(*(pop->begin()));
   map	 = multiline(land.road);
   timer	 = new QTimer();
@@ -93,7 +91,6 @@ Draw::Draw(QString	filename,
   timer2->start(500);
   connect(timer2,SIGNAL(timeout()),this,SLOT(onTimer2()));
 }
-
 void Draw::InitCar()
 {
   int id;
@@ -193,15 +190,6 @@ void Draw::paintEvent (QPaintEvent *)
     }
   painter.setPen(Qt::black);
   painter.setBrush(Qt::black);
-}
-
-int Draw::Evaluate()
-{
-  int eval=0;
-  QVector<Car>::iterator car1;
-  for(car1=car.begin(); car1!=car.end(); ++car1)
-    if(car1->get_diff()==QPointF(0,0))eval++;
-  return 100-(int)(((double)eval/car.size())*100);
 }
 void Draw::onTimer()
 {

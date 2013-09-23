@@ -105,7 +105,8 @@ void Draw::smartAssist (Car& c)
       if ((c.number != itr->number )				&&
 	  (c.get_road_id () == itr->get_road_id() )		&&
 	  (len (c.get_pos (),itr->get_pos()) < REGION(c) )	&&
-	  (InPDT (c.get_pos(),ROAD (c.get_road_id()).p2(),itr->get_pos())<0))
+	  (InPDT(c.get_pos(),ROAD (c.get_road_id()).p2(),itr->get_pos())<0)&&
+	  (itr->get_num() == c.get_num()))
 	{
 	  c.set_diff(QPointF(0,0));
 	  return;

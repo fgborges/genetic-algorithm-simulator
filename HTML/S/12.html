@@ -1,53 +1,18 @@
 <html>
 <head>
-<title>src/GA/population.cc</title>
+<title>src/GA/individual.cc</title>
 <meta name='robots' content='noindex,nofollow'>
 <meta name='generator' content='GLOBAL-5.7.1'>
 </head>
 <body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
-<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/26.html'>src</a>/<a href='../files/27.html'>GA</a>/population.cc</h2>
-<i><font color='green'>/* [&lt;][&gt;]<a href='#L12'>[^]</a><a href='#L22'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
-<hr>
-<h2>DEFINITIONS</h2>
-This source file includes following definitions.
-<ol>
-<li><a href='#L12' title='Defined at 12.'>LossNum</a>
-<li><a href='#L22' title='Defined at 22.'>begin</a>
-</ol>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/27.html'>src</a>/<a href='../files/28.html'>GA</a>/individual.cc</h2>
+<i><font color='green'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
 <hr>
 <pre>
-<a name='L1'><i><font color='green'>/****************************************</font></i>
-<a name='L2'><i><font color='green'> *  Author: MackRick.</font></i>
-<a name='L3'><i><font color='green'> *   Email: mack.sept.public@gmail.com.</font></i>
-<a name='L4'><i><font color='green'> *    File: population.cc.</font></i>
-<a name='L5'><i><font color='green'> * Project: /home/mackrick/beta1/src/GA.</font></i>
-<a name='L6'><i><font color='green'> *  Coding: en_US.UTF-8.</font></i>
-<a name='L7'><i><font color='green'> * Summary:</font></i>
-<a name='L8'><i><font color='green'> * Last Change: 12-Sep-2013.</font></i>
-<a name='L9'><i><font color='green'> ****************************************/</font></i>
-<a name='L10'><font color='darkred'>#include</font> "<a href='17.html'>population.h</a>"
-<a name='L11'>Population::Population(<b>int</b> num)
-<a name='L12'>  :gene_max(num),IndivNum(9),<a href='../R/15.html' title='Multiple refered from 4 places.'>LossNum</a>(9-3)
-<a name='L13'><font color='red'>{</font>
-<a name='L14'>  <a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a> *tmp;
-<a name='L15'>  <b>for</b>(<b>int</b> i = 0;i&lt;IndivNum;i++)
-<a name='L16'>    <font color='red'>{</font>
-<a name='L17'>      tmp = <b>new</b> <a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>(num);
-<a name='L18'>      indiv.<a href='../S/10.html#L60' title='Defined at 60 in src/GA/chromosome.cpp.'>push_back</a>(*tmp);
-<a name='L19'>      <b>delete</b> tmp;
-<a name='L20'>    <font color='red'>}</font>
-<a name='L21'><font color='red'>}</font>
-<a name='L22'>QVector&lt;<a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>&gt;::iterator Population::<a href='../R/31.html' title='Multiple refered from 23 places.'>begin</a>()
-<a name='L23'><font color='red'>{</font>
-<a name='L24'>  <b>return</b> indiv.<a href='../D/31.html' title='Multiple defined in 3 places.'>begin</a>();
-<a name='L25'><font color='red'>}</font>
-<a name='L26'><a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>&amp; Population::<a href='../R/29.html' title='Multiple refered from 20 places.'>at</a>(<b>int</b> i)
-<a name='L27'><font color='red'>{</font>
-<a name='L28'>  <b>return</b> indiv[i];
-<a name='L29'><font color='red'>}</font>
+<a name='L1'>
 </pre>
 <hr>
 <a name='BOTTOM'>
-<i><font color='green'>/* [&lt;][&gt;]<a href='#L12'>[^]</a><a href='#L22'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<i><font color='green'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
 </body>
 </html>

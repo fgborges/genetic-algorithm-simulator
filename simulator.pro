@@ -22,6 +22,7 @@ SOURCES += src/car.cc \
            src/main.cc \
            src/navi.cc \
            src/signal.cc \
+	   src/evaluate-01.cc \
            src/GA/chromosome.cpp \
            src/GA/clossover.cc \
            src/GA/individual.cpp \

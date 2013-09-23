@@ -1,44 +1,68 @@
 <html>
 <head>
-<title>src/land.h</title>
+<title>src/car.h</title>
 <meta name='robots' content='noindex,nofollow'>
 <meta name='generator' content='GLOBAL-5.7.1'>
 </head>
 <body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
-<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/26.html'>src</a>/land.h</h2>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/27.html'>src</a>/car.h</h2>
 <i><font color='green'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
 <hr>
-<h2><a href='../J/17.html' title='Multiple included from 4 places.'>INCLUDED FROM</a></h2>
+<h2><a href='../J/13.html' title='Multiple included from 2 places.'>INCLUDED FROM</a></h2>
 <hr>
 <pre>
 <a name='L1'><i><font color='green'>/****************************************</font></i>
 <a name='L2'><i><font color='green'> *  Author: MackRick.</font></i>
 <a name='L3'><i><font color='green'> *   Email: mack.sept.public@gmail.com.</font></i>
-<a name='L4'><i><font color='green'> *    File: land.h.</font></i>
+<a name='L4'><i><font color='green'> *    File: car.h.</font></i>
 <a name='L5'><i><font color='green'> * Project: /home/mackrick/program/school/TMP.</font></i>
 <a name='L6'><i><font color='green'> *  Coding: en_US.UTF-8.</font></i>
 <a name='L7'><i><font color='green'> * Summary:</font></i>
 <a name='L8'><i><font color='green'> * Last Change: 10-Sep-2013.</font></i>
 <a name='L9'><i><font color='green'> ****************************************/</font></i>
 <a name='L10'><font color='darkred'>#pragma</font> once
-<a name='L11'>
+<a name='L11'><font color='darkred'>#include</font>&lt;QPointF&gt;
 <a name='L12'><font color='darkred'>#include</font>&lt;QVector&gt;
-<a name='L13'><font color='darkred'>#include</font>&lt;QHash&gt;
-<a name='L14'><font color='darkred'>#include</font>&lt;QLineF&gt;
-<a name='L15'><font color='darkred'>#include</font>&lt;QString&gt;
-<a name='L16'><font color='darkred'>#include</font> "<a href='2.html'>signal.h</a>"
-<a name='L17'>
-<a name='L18'><i><font color='green'>//typedef QMap&lt;int,QLineF&gt;::iterator RoadIterator;</font></i>
-<a name='L19'><font color='darkred'>#define</font> <a href='../R/22.html' title='Multiple refered from 2 places.'>RoadIterator</a> QHash&lt;<b>int</b>,QLineF&gt;::iterator
-<a name='L20'>
-<a name='L21'><b>struct</b> <a href='../R/14.html' title='Multiple refered from 4 places.'>Land</a>
-<a name='L22'><font color='red'>{</font>
-<a name='L23'>    <a href='../D/14.html' title='Multiple defined in 2 places.'>Land</a>(<b>const</b> QString&amp; filename);
-<a name='L24'>    QHash&lt;<b>int</b>,QLineF&gt; road;
-<a name='L25'>    QVector&lt;<a href='../S/8.html#L15' title='Defined at 15 in src/signal.cc.'>Signal</a>&gt; signal;
-<a name='L26'>    <b>int</b> <a href='../S/20.html#L22' title='Defined at 22 in src/land.cc.'>get_random_id</a>()<b>const</b>;
-<a name='L27'><font color='red'>}</font>;
-<a name='L28'>
+<a name='L13'><font color='darkred'>#include</font>&lt;QRectF&gt;
+<a name='L14'>class Car
+<a name='L15'><font color='red'>{</font>
+<a name='L16'>public:
+<a name='L17'>    Car(<b>const</b> <b>int</b> id = 0,<b>const</b> QPointF&amp; pos=QPoint(0,0));
+<a name='L18'>    <b>void</b> <a href='../S/4.html#L22' title='Defined at 22 in src/car.cc.'>moveTo</a>(<b>const</b> QPointF&amp; pos);
+<a name='L19'>
+<a name='L20'>    <b>void</b> <a href='../S/4.html#L32' title='Defined at 32 in src/car.cc.'>Add2Log</a>(<b>const</b> <b>int</b> id);
+<a name='L21'>    <b>void</b> <a href='../S/4.html#L42' title='Defined at 42 in src/car.cc.'>back_Log</a>();
+<a name='L22'>    bool <a href='../S/4.html#L37' title='Defined at 37 in src/car.cc.'>isLog</a>(<b>const</b> <b>int</b> id)<b>const</b>;
+<a name='L23'>
+<a name='L24'>    <b>void</b> <a href='../S/4.html#L47' title='Defined at 47 in src/car.cc.'>set_diff</a>(<b>const</b> QPointF&amp; in_diff);
+<a name='L25'>    <b>const</b> QPointF&amp; <a href='../S/4.html#L52' title='Defined at 52 in src/car.cc.'>get_diff</a>()<b>const</b>;
+<a name='L26'>
+<a name='L27'>    <b>void</b> <a href='../S/4.html#L57' title='Defined at 57 in src/car.cc.'>set_dest</a>(<b>const</b> QPointF&amp; dest);
+<a name='L28'>    <b>const</b> QPointF&amp; <a href='../S/4.html#L62' title='Defined at 62 in src/car.cc.'>get_dest</a>()<b>const</b>;
+<a name='L29'>
+<a name='L30'>    <b>int</b> <a href='../S/4.html#L67' title='Defined at 67 in src/car.cc.'>get_road_id</a>()<b>const</b>;
+<a name='L31'>    <b>const</b> QPointF&amp; <a href='../S/4.html#L27' title='Defined at 27 in src/car.cc.'>get_pos</a>()<b>const</b>;
+<a name='L32'>
+<a name='L33'>    <b>const</b> QRectF&amp; <a href='../S/4.html#L77' title='Defined at 77 in src/car.cc.'>get_rect</a>()<b>const</b>;
+<a name='L34'>    <b>void</b> <a href='../S/4.html#L82' title='Defined at 82 in src/car.cc.'>set_rect</a>(<b>const</b> QRectF&amp; rect);
+<a name='L35'>
+<a name='L36'>    <b>void</b> <a href='../S/4.html#L87' title='Defined at 87 in src/car.cc.'>set_speed</a>(<b>const</b> qreal speed);
+<a name='L37'>    qreal <a href='../S/4.html#L91' title='Defined at 91 in src/car.cc.'>get_speed</a>()<b>const</b>;
+<a name='L38'>    <b>void</b> <a href='../S/4.html#L99' title='Defined at 99 in src/car.cc.'>set_num</a>(<b>int</b>);
+<a name='L39'>    <b>int</b> <a href='../S/4.html#L103' title='Defined at 103 in src/car.cc.'>get_num</a>()<b>const</b>;
+<a name='L40'>    <b>void</b> <a href='../S/4.html#L72' title='Defined at 72 in src/car.cc.'>Clear_log</a>();
+<a name='L41'>    <b>void</b> <a href='../S/4.html#L95' title='Defined at 95 in src/car.cc.'>log_pop_back</a>();
+<a name='L42'>    <b>int</b> number;
+<a name='L43'>    bool signal_stop;
+<a name='L44'>private:
+<a name='L45'>    QVector&lt;<b>int</b>&gt; log;
+<a name='L46'>    QPointF diff;
+<a name='L47'>    QPointF pos;
+<a name='L48'>    QPointF dest;
+<a name='L49'>    qreal speed;
+<a name='L50'>    QRectF rect;
+<a name='L51'>    <b>int</b> <a href='../S/4.html#L16' title='Defined at 16 in src/car.cc.'>num</a>;
+<a name='L52'><font color='red'>}</font>;
 </pre>
 <hr>
 <a name='BOTTOM'>

@@ -1,62 +1,47 @@
 <html>
 <head>
-<title>src/GA/individual.cpp</title>
+<title>src/GA/individual.h</title>
 <meta name='robots' content='noindex,nofollow'>
 <meta name='generator' content='GLOBAL-5.7.1'>
 </head>
 <body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
-<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/26.html'>src</a>/<a href='../files/27.html'>GA</a>/individual.cpp</h2>
-<i><font color='green'>/* [&lt;][&gt;]<a href='#L17'>[^]</a><a href='#L22'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/27.html'>src</a>/<a href='../files/28.html'>GA</a>/individual.h</h2>
+<i><font color='green'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
 <hr>
-<h2>DEFINITIONS</h2>
-This source file includes following definitions.
-<ol>
-<li><a href='#L17' title='Defined at 17.'>getEval</a>
-<li><a href='#L22' title='Defined at 22.'>setEval</a>
-</ol>
+<h2><a href='../J/6.html' title='Multiple included from 6 places.'>INCLUDED FROM</a></h2>
 <hr>
 <pre>
 <a name='L1'><i><font color='green'>/****************************************</font></i>
 <a name='L2'><i><font color='green'> *  Author: MackRick.</font></i>
 <a name='L3'><i><font color='green'> *   Email: mack.sept.public@gmail.com.</font></i>
-<a name='L4'><i><font color='green'> *    File: individual.cpp.</font></i>
+<a name='L4'><i><font color='green'> *    File: individual.h.</font></i>
 <a name='L5'><i><font color='green'> * Project: /home/mackrick/beta1/src/GA.</font></i>
-<a name='L6'><i><font color='green'> *  Coding: ja_JP.UTF-8.</font></i>
-<a name='L7'><i><font color='green'> * Summary:</font></i>
-<a name='L8'><i><font color='green'> * Last Change: 12-Sep-2013.</font></i>
-<a name='L9'><i><font color='green'> ****************************************/</font></i>
-<a name='L10'><font color='darkred'>#include</font>"<a href='18.html'>src/GA/individual.h</a>"
-<a name='L11'>
-<a name='L12'><a href='../R/11.html' title='Multiple refered from 26 places.'>Individual</a>::<a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a> (<b>int</b> num)
-<a name='L13'>  :Chromosome(num)
-<a name='L14'><font color='red'>{</font>
-<a name='L15'><font color='red'>}</font>
-<a name='L16'>
-<a name='L17'><b>int</b> <a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>::<a href='../R/35.html' title='Multiple refered from 2 places.'>getEval</a> ()<b>const</b>
-<a name='L18'><font color='red'>{</font>
-<a name='L19'>  <b>return</b> eval;
-<a name='L20'><font color='red'>}</font>
-<a name='L21'>
-<a name='L22'><b>void</b> <a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>::<a href='../R/57.html' title='Multiple refered from 2 places.'>setEval</a> (<b>int</b> eval)
-<a name='L23'><font color='red'>{</font>
-<a name='L24'>  <b>this</b>-&gt;eval = eval;
-<a name='L25'><font color='red'>}</font>
-<a name='L26'>
-<a name='L27'><b>bool</b> <a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>::<b>operator</b> == (<b>const</b> Individual&amp; i)<b>const</b>
-<a name='L28'><font color='red'>{</font>
-<a name='L29'>  <b>return</b> <b>this</b>-&gt;eval == i.eval;
-<a name='L30'><font color='red'>}</font>
-<a name='L31'><b>bool</b> <a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>::<b>operator</b> &gt; (<b>const</b> Individual&amp; i)<b>const</b>
-<a name='L32'><font color='red'>{</font>
-<a name='L33'>  <b>return</b> <b>this</b>-&gt;eval &gt; i.eval;
-<a name='L34'><font color='red'>}</font>
-<a name='L35'><b>bool</b> <a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>::<b>operator</b> &lt; (<b>const</b> Individual&amp; i)<b>const</b>
-<a name='L36'><font color='red'>{</font>
-<a name='L37'>  <b>return</b> <b>this</b>-&gt;eval &lt; i.eval;
-<a name='L38'><font color='red'>}</font>
+<a name='L6'><i><font color='green'> *  Coding: en_US.UTF-8.</font></i>
+<a name='L7'><i><font color='green'> * Summary: 個体クラスです。染色体クラスを</font></i>
+<a name='L8'><i><font color='green'> * 　　　　 継承し実際にアルゴリズムでは</font></i>
+<a name='L9'><i><font color='green'> * 　　　　 こちらからデータを操作してもら</font></i>
+<a name='L10'><i><font color='green'> * 　　　   もらうことになります。</font></i>
+<a name='L11'><i><font color='green'> * Last Change: 12-Sep-2013.</font></i>
+<a name='L12'><i><font color='green'> ****************************************/</font></i>
+<a name='L13'><font color='darkred'>#ifndef</font> <a href='../S/19.html#L14' title='Defined at 14 in src/GA/individual.h.'>INDIVIDUAL_H</a>
+<a name='L14'><font color='darkred'>#define</font> <a href='../S/19.html#L13' title='Refered from 13 in src/GA/individual.h.'>INDIVIDUAL_H</a>
+<a name='L15'><font color='darkred'>#include</font>"<a href='14.html'>chromosome.h</a>"
+<a name='L16'>class <a href='../S/20.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a> : public <a href='../S/11.html#L17' title='Defined at 17 in src/GA/chromosome.cpp.'>Chromosome</a>
+<a name='L17'><font color='red'>{</font>
+<a name='L18'>        public:
+<a name='L19'>                <a href='../S/20.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>(<b>int</b> <a href='../S/4.html#L16' title='Defined at 16 in src/car.cc.'>num</a>=0);
+<a name='L20'>                <b>int</b> <a href='../S/20.html#L17' title='Defined at 17 in src/GA/individual.cpp.'>getEval</a>()<b>const</b>;
+<a name='L21'>                <b>void</b> <a href='../S/20.html#L22' title='Defined at 22 in src/GA/individual.cpp.'>setEval</a>(<b>int</b>);
+<a name='L22'>                bool operator==(<b>const</b> <a href='../S/20.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>&amp;)<b>const</b>;
+<a name='L23'>                bool operator&gt;(<b>const</b> <a href='../S/20.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>&amp;)<b>const</b>;
+<a name='L24'>                bool operator&lt;(<b>const</b> <a href='../S/20.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>&amp;)<b>const</b>;
+<a name='L25'>        private:
+<a name='L26'>                <b>int</b> eval;
+<a name='L27'><font color='red'>}</font>;
+<a name='L28'><font color='darkred'>#endif</font>
 </pre>
 <hr>
 <a name='BOTTOM'>
-<i><font color='green'>/* [&lt;][&gt;]<a href='#L17'>[^]</a><a href='#L22'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<i><font color='green'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
 </body>
 </html>
