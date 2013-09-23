@@ -18,7 +18,6 @@ class Signal : public QPointF
   Signal(const qreal x = 0,const qreal y=0);
   void set_pattern(const int id,QVector<bool> pattern);
   bool get_pattern(const int id,const int index)const;
-
   QMap< int,QVector<bool> >::iterator end();
   QMap< int,QVector<bool> >::iterator begin();
   int size()const;

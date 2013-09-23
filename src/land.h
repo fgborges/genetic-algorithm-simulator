@@ -14,15 +14,17 @@
 #include<QLineF>
 #include<QString>
 #include "signal.h"
+#include<QPair>
 
 //typedef QMap<int,QLineF>::iterator RoadIterator;
 #define RoadIterator QHash<int,QLineF>::iterator
-
+typedef QPair<QLineF,int> Road;
 struct Land
 {
-    Land(const QString& filename);
-    QHash<int,QLineF> road;
-    QVector<Signal> signal;
-    int get_random_id()const;
+  Land(const QString& filename);
+  QHash<int,Road> road;
+  int countSignal();
+  QVector<Signal> signal;
+  int get_random_id()const;
 };
 

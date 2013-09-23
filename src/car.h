@@ -7,9 +7,7 @@
  * Summary:
  * Last Change: 10-Sep-2013.
  ****************************************/
-#ifndef CAR_H
-#define CAR_H
-
+#pragma once
 #include<QPointF>
 #include<QVector>
 #include<QRectF>
@@ -37,8 +35,10 @@ public:
 
     void set_speed(const qreal speed);
     qreal get_speed()const;
-
+    void set_num(int);
+    int get_num()const;
     void Clear_log();
+    void log_pop_back();
     int number;
     bool signal_stop;
 private:
@@ -48,6 +48,5 @@ private:
     QPointF dest;
     qreal speed;
     QRectF rect;
+    int num;
 };
-
-#endif

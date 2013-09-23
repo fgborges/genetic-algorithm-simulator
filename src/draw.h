@@ -43,6 +43,8 @@ private:
     //Initialized funciton;
     void InitCar();
     void InitSignal(Individual& indiv);
+    //count Function
+    int Count_car(int key);
     //menber
     QTimer *timer,*timer2;
     Land land;

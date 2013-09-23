@@ -39,91 +39,102 @@ void Draw::SetDiff (Car& car,const QLineF& road)
   diff.setY (road.dy()/road.length());
   car.set_diff (diff);
 }
-void Draw::SetNextRoad (Car& car)
+
+int Draw::Count_car(int key)
 {
-  QPair<int,QLineF> result,r;
-  result.first=-1;
-  static QLineF line;
-  qreal min = 10000;
-  RoadIterator itr;
-  for (itr = land.road.begin () ; itr!=land.road.end () ; ++itr)
+  int cnt=0;
+  for (auto c : car)
+    if (c.get_road_id () == key) cnt++;
+  return cnt;
+}
+void Draw::SetNextRoad (Car& c)
+{
+  QPair<int,QLineF>	result,r;
+  QLineF		line;
+  qreal			min = 10000;
+  int			num = 0;
+  result.first = -1;
+  for (auto r=land.road.begin () ; r!=land.road.end () ; ++r)
     {
-      r = qMakePair (itr.key () , itr.value ());
-      if (car.get_pos ()==r.second.p1() &&
-	  !car.isLog (r.first))
+      if (r.value().first.p1() == c.get_pos ()	&&
+	  !c.isLog (r.key()))
 	{
-	  line.setP1 (car.get_pos());
-	  line.setP2 (car.get_dest());
-	  if (angle (r.second,line)<min)
+	  line.setP1 (c.get_pos());
+	  line.setP2 (c.get_dest());
+	  if (angle (r.value().first,line)<min)
 	    {
-	      min = angle (r.second,line);
-	      result = qMakePair(r.first,r.second);
+	      min    = angle (r.value().first,line);
+	      result = qMakePair (r.key(),r.value().first);
+	      num = r.value ().second;
 	    }
 	}
     }
   if (result.first == -1)
     {
-      int id=car.get_road_id ();
-      car.Clear_log ();
-      car.Add2Log (id);
+      int id = c.get_road_id ();
+      c.set_dest (land.road.value (land.get_random_id()).first.p2 ());
+      c.Clear_log ();
+      c.set_num(qrand ()%land.road.value(id).second);
+      c.Add2Log(id);
     }
   else
     {
-      car.Add2Log (result.first);
+      c.Add2Log (result.first);
+      c.set_num (qrand ()%num);
     }
 }
-  bool Draw::Reach(const Car& car,const QLineF& road)const
-  {
-    return len(car.get_pos(),road.p2()) < (len(QPointF(0,0),car.get_diff())+3);
-  }
-  void Draw::smartAssist(Car& c)
-  {
-#define ROAD(id) land.road.value(id)
-#define REGION(car) (car).get_rect().height()+(car).get_speed()
-
-    QVector<Car>::iterator itr;
-    for(itr = car.begin() ; itr != car.end() ; ++itr)
-      {
-	if(( ROAD (c.get_road_id()).p2() == ROAD (itr->get_road_id()).p1() ) &&
-	   ( ROAD (c.get_road_id()).p1() != ROAD (itr->get_road_id()).p2() ) &&
-	   ( len(c.get_pos(),itr->get_pos()) < REGION(c) ))
-	  {
-	    c.set_diff (QPointF(0,0));
-	    SetNextRoad (c);
-	    return;
-	  } 
-	if((c.number != itr->number )				&&
-	   (c.get_road_id () == itr->get_road_id() )		&&
-	   (len (c.get_pos (),itr->get_pos()) < REGION(c) )	&&
-	   (InPDT (c.get_pos(),ROAD (c.get_road_id()).p2(),itr->get_pos())<0))
-	  {
-	    c.set_diff(QPointF(0,0));
-	    return;
-	  }
-      }
+bool Draw::Reach (const Car& car,const QLineF& road)const
+{
+  return len(car.get_pos(),road.p2()) < (len(QPointF(0,0),car.get_diff())+3);
+}
+void Draw::smartAssist (Car& c)
+{
+#define ROAD(id) land.road.value(id).first
+#define REGION(car) (car).get_rect().height()+(car).get_speed()+2
+  QVector<Car>::iterator itr;
+  for (itr = car.begin() ; itr != car.end() ; ++itr)
+    {
+      if ((ROAD (c.get_road_id()).p2() == ROAD (itr->get_road_id()).p1()) &&
+	  (ROAD (c.get_road_id()).p1() != ROAD (itr->get_road_id()).p2()) &&
+	  (len(c.get_pos(),itr->get_pos()) < REGION(c)))
+	{
+	  c.set_diff (QPointF(0,0));
+	  SetNextRoad (c);
+	  return;
+	} 
+      if ((c.number != itr->number )				&&
+	  (c.get_road_id () == itr->get_road_id() )		&&
+	  (len (c.get_pos (),itr->get_pos()) < REGION(c) )	&&
+	  (InPDT (c.get_pos(),ROAD (c.get_road_id()).p2(),itr->get_pos())<0))
+	{
+	  c.set_diff(QPointF(0,0));
+	  return;
+	}
+    }
 #undef ROAD
 #undef REGION
-  }
-  void Draw::CheckSignal (Car& car,long long int l_clock)
-  {
-    QVector<Signal>::iterator itr = this->land.signal.begin();
-    while (itr!=land.signal.end())
-      {
-	if (len (QPointF (itr->x (),itr->y ()),car.get_pos ())<7)
-	  {
-	    if (!itr->get_pattern (car.get_road_id(),l_clock))
-	      {
-		car.set_diff ( QPointF(0,0) );
-		car.signal_stop = true;
-	      }
-	    else
-	      {
-		car.signal_stop = false;
-	      }
-	    break;
-	  }
-	++itr;
-      }
-  }
+}
+void Draw::CheckSignal (Car& car,long long int l_clock)
+{
+  QVector<Signal>::iterator itr = this->land.signal.begin();
+  while (itr!=land.signal.end())
+    {
+      if (len (QPointF (itr->x (),itr->y ()),car.get_pos ())<7)
+	{
+	  if (!itr->get_pattern (car.get_road_id(),l_clock))
+	    {
+	      car.set_diff ( QPointF(0,0) );
+	      if(!car.signal_stop)car.log_pop_back();
+	      car.signal_stop = true;
+	    }
+	  else
+	    {
+	      car.signal_stop = false;
+	    }
+	  break;
+	}
+      ++itr;
+    }
+}
 
 

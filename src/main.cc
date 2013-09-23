@@ -16,7 +16,6 @@
 #include<QPushButton>
 #include<QDial>
 #include<QLCDNumber>
-
 int main(int argc,char **argv)
 {
     QApplication app(argc,argv);
@@ -27,12 +26,12 @@ int main(int argc,char **argv)
     if(argc==4)draw = new Draw(argv[1],atoi(argv[2]),argv[3]);
     else if(argc==3)draw = new Draw(argv[1],atoi(argv[2]));
     else if(argc==2)draw = new Draw(argv[1]);
-    draw->show();
     QObject::connect(resetButton,SIGNAL(clicked()),draw,SLOT(reset()));
     QObject::connect(dial,SIGNAL(valueChanged(int)),draw,SLOT(change_speed(int)));
     QObject::connect(draw,SIGNAL(evalChanged(int)),LCD,SLOT(display(int)));
+    draw->show();
     resetButton->show();
-    dial->show();
     LCD->show();
+    dial->show();
     return app.exec();
 }

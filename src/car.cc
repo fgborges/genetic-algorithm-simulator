@@ -13,7 +13,7 @@
 #include<algorithm>
 
 Car::Car(const int id,const QPointF& pos)
-    :pos(pos),speed(2),rect(0,0,6,6)
+  :pos(pos),speed(2),rect(0,0,6,6),num(0)
 {
     log.append(id);
     signal_stop=false;
@@ -91,4 +91,16 @@ void Car::set_speed(const qreal speed)
 qreal Car::get_speed()const
 {
     return this->speed;
+}
+void Car::log_pop_back()
+{
+  log.pop_back();
+}
+void Car::set_num(int n)
+{
+  num=n;
+}
+int Car::get_num()const
+{
+  return num;
 }

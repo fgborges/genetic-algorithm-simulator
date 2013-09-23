@@ -7,7 +7,6 @@
  * Summary:
  * Last Change: 13-Sep-2013.
  ****************************************/
-
 #include "draw.h"
 #include "land.h"
 #include "signal.h"
@@ -42,51 +41,30 @@ inline qreal len(const QPointF& p1,const QPointF& p2)
     QPointF d=p2-p1;
     return qSqrt(qPow(d.x(),2)+qPow(d.y(),2));
 }
-inline int countGene(QVector<Signal>& signal)
-{
-  int cnt = 0;
-  for(auto s:signal)
-    {
-      cnt+=s.size ();
-    }
-  return cnt;
-}
 inline QPointF make_road_d(const QLineF& road)
 {
   QPointF d(road.dx(),road.dy());
   d/=road.length();
   return d*3;
 }
-QVector<QLineF> multiline (QHash<int,QLineF> l)
+QVector<QLineF> multiline (const QHash<int,Road>& l)
 {
   QVector<QPair<QLineF,int> > list;
   QVector<QLineF>	tmp;
   QLineF		line;
   QPointF		diff;
-  bool			flag;
-    for (auto r : l)
-    {
-      flag = true;
-      for ( auto i : list)
-	if ( i.first == r )
-	  {
-	    i.second++;
-	    flag = false;
-	    break;
-	  }
-      if(flag)
-	list.push_back (qMakePair (r,1));
-    }
+  for (auto r : l)
+    list.push_back(r);
   for (auto i : list)
     {
       diff = QPointF(-i.first.dy(),i.first.dx());
       QPointF diff2 = diff;
       diff /= qSqrt(diff2.x()*diff2.x()+diff2.y()*diff2.y());
-      diff *=6;
+      diff *= 5;
       for (int j=0;j<i.second;j++)
 	{
-	  line.setP1 (i.first.p1()+diff*(j+1));
- 	  line.setP2 (i.first.p2()+diff*(j+1));
+	  line.setP1 (i.first.p1()-diff*(j+1));
+ 	  line.setP2 (i.first.p2()-diff*(j+1));
 	  tmp.push_back (line);
 	}
     }
@@ -104,7 +82,8 @@ Draw::Draw(QString	filename,
    index(0)
 {
   InitCar();
-  pop	 = new  Population(countGene(land.signal));
+  pop	 = new  Population(land.countSignal());
+  qDebug()<<land.countSignal();
   InitSignal(*(pop->begin()));
   map	 = multiline(land.road);
   timer	 = new QTimer();
@@ -123,11 +102,11 @@ void Draw::InitCar()
   for(int i = 0 ; i< car_number ; i++)
     {
       id = land.get_random_id();
-      Car tmp(id,land.road.value(id).p1());
-      tmp.set_dest(land.road[land.get_random_id()].p2());
-      SetDiff(tmp,land.road[id]);
+      Car tmp(id,land.road.value(id).first.p1());
+      tmp.set_dest(land.road[land.get_random_id()].first.p2());
+      SetDiff(tmp,land.road[id].first);
       size = qrand()%3;
-      tmp.set_rect(QRectF(0,0,size+5,size+5));
+      tmp.set_rect(QRectF(0,0,size+2,size+2));
       tmp.set_speed((qrand()%150)/100.0+0.9);
       tmp.number = i;
       qDebug()<<"+------Car_Generate-------";
@@ -142,26 +121,22 @@ void Draw::InitCar()
     }
   CAR_SIZE=5;
 }
-
 void Draw::InitSignal (Individual& indiv)
 {
   QVector<Signal>::iterator	itr	= land.signal.begin();
   QVector<Gene>::iterator	pattern = indiv.begin();
-  RoadIterator road;
   while (itr!=land.signal.end())
     {
       qDebug()<<"+--------Signal_Generate---------";
       qDebug()<<"|pos     :"<<itr->x()<<','<<itr->y();
-      for (road=land.road.begin(); road!=land.road.end(); ++road)
+      for (auto r = land.road.begin () ;r != land.road.end () ; ++r)
 	{
-	  if (itr->x() == road.value().p1().x()	&&
-	      itr->y() == road.value().p1().y())
+	  if (itr->x() == r.value ().first.p1 ().x () &&
+	      itr->y() == r.value ().first.p1 ().y ())
 	    {
-	      qDebug()<<"|connect :"<<road.key ();
-	      qDebug()<<"|        :"<<road.value ();
-	      qDebug()<<"|pattern :"<<*(pattern);
-	      qDebug()<<"|        :";
-	      itr->set_pattern (road.key(),*pattern);
+	      qDebug()<<"|connect :"<<r.key ();
+	      qDebug()<<"|pattern :"<<*pattern;
+	      itr->set_pattern (r.key(),*pattern);
 	      ++pattern;
 	    }
 	}
@@ -169,7 +144,6 @@ void Draw::InitSignal (Individual& indiv)
       ++itr;
     }
 }
-
 void Draw::paintEvent (QPaintEvent *)
 {
   QPainter	painter(this);
@@ -183,19 +157,21 @@ void Draw::paintEvent (QPaintEvent *)
   if(img!="none")painter.drawImage(QPoint(5,-10),QImage(img));
   //Drawing Road
   painter.drawLines (this->map);
-  painter.setPen(Qt::black);
+
   //Drawing Car position and destination
   for (auto c : car)
     {
-      d=make_road_d (land.road [c.get_road_id()]);
+      d=make_road_d (land.road [c.get_road_id()].first);
+      d *= c.get_num()+1;
       rect_pos=c.get_rect();
-      rect_pos.moveCenter (c.get_pos () +QPointF(d.y(),-d.x())*road_range/2);
+      rect_pos.moveCenter (c.get_pos ()+QPointF(d.y(),-d.x())*road_range/2);
+      painter.setPen(Qt::black);
       painter.drawRect(rect_pos);
       rect_pos.moveCenter (c.get_dest ());
+      painter.setPen(Qt::red);
       painter.drawRect(rect_pos);
     }
-  painter.setPen(Qt::red);
-  //Drawing Signal
+    //Drawing Signal
   for (auto s : land.signal)
     {
       QMap<int,QVector<bool> >::iterator pattern;
@@ -211,7 +187,7 @@ void Draw::paintEvent (QPaintEvent *)
 	      painter.setPen(Qt::red);
 	      painter.setBrush(Qt::red);
 	    }
-	  QPointF pos=SignalPos(land.road[pattern.key()]);
+	  QPointF pos=SignalPos(land.road[pattern.key()].first);
 	  painter.drawEllipse(pos.x()-3,pos.y()-3,6,6);
 	}
     }
@@ -233,31 +209,28 @@ void Draw::onTimer()
   for (auto& c : car)
     {
       c.moveTo (c.get_pos () + c.get_diff ());
-      r = land.road [c.get_road_id ()];
+      r = land.road [c.get_road_id ()].first;
       SetDiff (c,r);
+
       if (Reach(c,r))
 	{
 	  c.moveTo(r.p2 ());
 	  if (c.get_pos () == c.get_dest ())
 	    {
-	      c.set_dest (land.road [land.get_random_id ()].p2 ());
+	      c.set_dest (land.road [land.get_random_id ()].first.p2 ());
 	      c.Clear_log();
 	    }
 	  SetNextRoad (c);
-	  r = land.road [c.get_road_id ()];
 	  CheckSignal (c,g_clock%8);
 	}
       if (c.signal_stop)
 	{
 	  CheckSignal (c,g_clock%8);
-	  
 	}
       smartAssist(c);
     }
-
   if(g_clock%10 == 0)
     {
-
       int eval;
       pop->at(index).setEval(eval=Evaluate());
       evalChanged(eval);

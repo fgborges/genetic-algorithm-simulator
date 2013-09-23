@@ -8,15 +8,16 @@
  * Last Change: 12-Sep-2013.
  ****************************************/
 #include "population.h"
+#include <QDebug>
 Population::Population(int num)
-  :gene_max(num),IndivNum(9),LossNum(9-3)
+  :gene_max(num),
+   IndivNum(9),
+   LossNum(6)
 {
-  Individual *tmp;
-  for(int i = 0;i<IndivNum;i++)
+  for(int i = 0;i<9;i++)
     {
-      tmp = new Individual(num);
-      indiv.push_back(*tmp);
-      delete tmp;
+      Individual tmp(num);
+      indiv.push_back(tmp);
     }
 }
 QVector<Individual>::iterator Population::begin()

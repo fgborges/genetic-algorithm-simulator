@@ -18,22 +18,23 @@ Signal::Signal(const qreal x,const qreal y)
 
 void Signal::set_pattern(const int id,QVector<bool> p)
 {
-    this->pattern.insert(id,p);
+  this->pattern.insert(id,p);
 }
 
 bool Signal::get_pattern(const int id,const int index)const
 {
-    return pattern.value(id).at(index);
+  return pattern.value(id).at(index);
 }
 QMap< int,QVector<bool> >::iterator Signal::begin()
 {
-    return pattern.begin();
+  return pattern.begin();
 }
 QMap< int,QVector<bool> >::iterator Signal::end()
 {
-    return pattern.end();
+  return pattern.end();
 }
 int Signal::size()const
 {
-    return pattern.size();
+  qDebug()<<pattern.size();
+  return pattern.size();
 }
