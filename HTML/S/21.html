@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>src/car.h</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/26.html'>src</a>/car.h</h2>
+<i><font color='green'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2><a href='../J/13.html' title='Multiple included from 2 places.'>INCLUDED FROM</a></h2>
+<hr>
+<pre>
+<a name='L1'><i><font color='green'>/****************************************</font></i>
+<a name='L2'><i><font color='green'> *  Author: MackRick.</font></i>
+<a name='L3'><i><font color='green'> *   Email: mack.sept.public@gmail.com.</font></i>
+<a name='L4'><i><font color='green'> *    File: car.h.</font></i>
+<a name='L5'><i><font color='green'> * Project: /home/mackrick/program/school/TMP.</font></i>
+<a name='L6'><i><font color='green'> *  Coding: en_US.UTF-8.</font></i>
+<a name='L7'><i><font color='green'> * Summary:</font></i>
+<a name='L8'><i><font color='green'> * Last Change: 10-Sep-2013.</font></i>
+<a name='L9'><i><font color='green'> ****************************************/</font></i>
+<a name='L10'><font color='darkred'>#ifndef</font> <a href='../S/21.html#L11' title='Defined at 11 in src/car.h.'>CAR_H</a>
+<a name='L11'><font color='darkred'>#define</font> <a href='../S/21.html#L10' title='Refered from 10 in src/car.h.'>CAR_H</a>
+<a name='L12'>
+<a name='L13'><font color='darkred'>#include</font>&lt;QPointF&gt;
+<a name='L14'><font color='darkred'>#include</font>&lt;QVector&gt;
+<a name='L15'><font color='darkred'>#include</font>&lt;QRectF&gt;
+<a name='L16'>class Car
+<a name='L17'><font color='red'>{</font>
+<a name='L18'>public:
+<a name='L19'>    Car(<b>const</b> <b>int</b> id = 0,<b>const</b> QPointF&amp; pos=QPoint(0,0));
+<a name='L20'>    <b>void</b> <a href='../S/4.html#L22' title='Defined at 22 in src/car.cc.'>moveTo</a>(<b>const</b> QPointF&amp; pos);
+<a name='L21'>
+<a name='L22'>    <b>void</b> <a href='../S/4.html#L32' title='Defined at 32 in src/car.cc.'>Add2Log</a>(<b>const</b> <b>int</b> id);
+<a name='L23'>    <b>void</b> <a href='../S/4.html#L42' title='Defined at 42 in src/car.cc.'>back_Log</a>();
+<a name='L24'>    bool <a href='../S/4.html#L37' title='Defined at 37 in src/car.cc.'>isLog</a>(<b>const</b> <b>int</b> id)<b>const</b>;
+<a name='L25'>
+<a name='L26'>    <b>void</b> <a href='../S/4.html#L47' title='Defined at 47 in src/car.cc.'>set_diff</a>(<b>const</b> QPointF&amp; in_diff);
+<a name='L27'>    <b>const</b> QPointF&amp; <a href='../S/4.html#L52' title='Defined at 52 in src/car.cc.'>get_diff</a>()<b>const</b>;
+<a name='L28'>
+<a name='L29'>    <b>void</b> <a href='../S/4.html#L57' title='Defined at 57 in src/car.cc.'>set_dest</a>(<b>const</b> QPointF&amp; dest);
+<a name='L30'>    <b>const</b> QPointF&amp; <a href='../S/4.html#L62' title='Defined at 62 in src/car.cc.'>get_dest</a>()<b>const</b>;
+<a name='L31'>
+<a name='L32'>    <b>int</b> <a href='../S/4.html#L67' title='Defined at 67 in src/car.cc.'>get_road_id</a>()<b>const</b>;
+<a name='L33'>    <b>const</b> QPointF&amp; <a href='../S/4.html#L27' title='Defined at 27 in src/car.cc.'>get_pos</a>()<b>const</b>;
+<a name='L34'>
+<a name='L35'>    <b>const</b> QRectF&amp; <a href='../S/4.html#L77' title='Defined at 77 in src/car.cc.'>get_rect</a>()<b>const</b>;
+<a name='L36'>    <b>void</b> <a href='../S/4.html#L82' title='Defined at 82 in src/car.cc.'>set_rect</a>(<b>const</b> QRectF&amp; <a href='../S/4.html#L16' title='Defined at 16 in src/car.cc.'>rect</a>);
+<a name='L37'>
+<a name='L38'>    <b>void</b> <a href='../S/4.html#L87' title='Defined at 87 in src/car.cc.'>set_speed</a>(<b>const</b> qreal speed);
+<a name='L39'>    qreal <a href='../S/4.html#L91' title='Defined at 91 in src/car.cc.'>get_speed</a>()<b>const</b>;
+<a name='L40'>
+<a name='L41'>    <b>void</b> <a href='../S/4.html#L72' title='Defined at 72 in src/car.cc.'>Clear_log</a>();
+<a name='L42'>    <b>int</b> number;
+<a name='L43'>    bool signal_stop;
+<a name='L44'>private:
+<a name='L45'>    QVector&lt;<b>int</b>&gt; log;
+<a name='L46'>    QPointF diff;
+<a name='L47'>    QPointF pos;
+<a name='L48'>    QPointF dest;
+<a name='L49'>    qreal speed;
+<a name='L50'>    QRectF <a href='../S/4.html#L16' title='Defined at 16 in src/car.cc.'>rect</a>;
+<a name='L51'><font color='red'>}</font>;
+<a name='L52'>
+<a name='L53'><font color='darkred'>#endif</font>
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

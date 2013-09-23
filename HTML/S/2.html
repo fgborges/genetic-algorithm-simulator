@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>src/signal.h</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/26.html'>src</a>/signal.h</h2>
+<i><font color='green'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2><a href='../J/21.html' title='Multiple included from 3 places.'>INCLUDED FROM</a></h2>
+<hr>
+<pre>
+<a name='L1'>
+<a name='L2'><i><font color='green'>/****************************************</font></i>
+<a name='L3'><i><font color='green'> *  Author: $AUTHOR.</font></i>
+<a name='L4'><i><font color='green'> *   Email: $MAIL.</font></i>
+<a name='L5'><i><font color='green'> *    File: signal.h.</font></i>
+<a name='L6'><i><font color='green'> * Project: /home/mackrick/tmp/beta1/src.</font></i>
+<a name='L7'><i><font color='green'> *  Coding: ja_JP.UTF-8.</font></i>
+<a name='L8'><i><font color='green'> * Summary:</font></i>
+<a name='L9'><i><font color='green'> * Last Change: 12-Sep-2013.</font></i>
+<a name='L10'><i><font color='green'> ****************************************/</font></i>
+<a name='L11'><font color='darkred'>#pragma</font> once
+<a name='L12'><font color='darkred'>#include</font>&lt;QPointF&gt;
+<a name='L13'><font color='darkred'>#include</font>&lt;QMap&gt;
+<a name='L14'><font color='darkred'>#include</font>&lt;QVector&gt;
+<a name='L15'>class <a href='../S/8.html#L15' title='Defined at 15 in src/signal.cc.'>Signal</a> : public QPointF
+<a name='L16'><font color='red'>{</font>
+<a name='L17'> public:
+<a name='L18'>  <a href='../S/8.html#L15' title='Defined at 15 in src/signal.cc.'>Signal</a>(<b>const</b> qreal x = 0,<b>const</b> qreal y=0);
+<a name='L19'>  <b>void</b> <a href='../S/8.html#L19' title='Defined at 19 in src/signal.cc.'>set_pattern</a>(<b>const</b> <b>int</b> id,QVector&lt;bool&gt; pattern);
+<a name='L20'>  bool <a href='../S/8.html#L24' title='Defined at 24 in src/signal.cc.'>get_pattern</a>(<b>const</b> <b>int</b> id,<b>const</b> <b>int</b> <a href='../S/5.html#L104' title='Defined at 104 in src/draw.cc.'>index</a>)<b>const</b>;
+<a name='L21'>
+<a name='L22'>  QMap&lt; <b>int</b>,QVector&lt;bool&gt; &gt;::iterator <a href='../D/34.html' title='Multiple defined in 2 places.'>end</a>();
+<a name='L23'>  QMap&lt; <b>int</b>,QVector&lt;bool&gt; &gt;::iterator <a href='../D/31.html' title='Multiple defined in 3 places.'>begin</a>();
+<a name='L24'>  <b>int</b> <a href='../S/8.html#L36' title='Defined at 36 in src/signal.cc.'>size</a>()<b>const</b>;
+<a name='L25'> private:
+<a name='L26'>  QMap&lt; <b>int</b>,QVector&lt;bool&gt; &gt; pattern;
+<a name='L27'><font color='red'>}</font>;
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

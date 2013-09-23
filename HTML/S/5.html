@@ -1,0 +1,330 @@
+<html>
+<head>
+<title>src/draw.cc</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/26.html'>src</a>/draw.cc</h2>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L27'>[^]</a><a href='#L289'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L27' title='Defined at 27.'>SignalPos</a>
+<li><a href='#L40' title='Defined at 40.'>len</a>
+<li><a href='#L45' title='Defined at 45.'>countGene</a>
+<li><a href='#L54' title='Defined at 54.'>make_road_d</a>
+<li><a href='#L60' title='Defined at 60.'>multiline</a>
+<li><a href='#L104' title='Defined at 104.'>index</a>
+<li><a href='#L118' title='Defined at 118.'>InitCar</a>
+<li><a href='#L146' title='Defined at 146.'>InitSignal</a>
+<li><a href='#L173' title='Defined at 173.'>paintEvent</a>
+<li><a href='#L222' title='Defined at 222.'>Evaluate</a>
+<li><a href='#L230' title='Defined at 230.'>onTimer</a>
+<li><a href='#L280' title='Defined at 280.'>onTimer2</a>
+<li><a href='#L284' title='Defined at 284.'>reset</a>
+<li><a href='#L289' title='Defined at 289.'>change_speed</a>
+</ol>
+<hr>
+<pre>
+<a name='L1'><i><font color='green'>/****************************************</font></i>
+<a name='L2'><i><font color='green'> *  Author: MackRick.</font></i>
+<a name='L3'><i><font color='green'> *   Email: mack.sept.public@gmail.com.</font></i>
+<a name='L4'><i><font color='green'> *    File: draw.cc.</font></i>
+<a name='L5'><i><font color='green'> * Project: /home/mackrick/beta1/src.</font></i>
+<a name='L6'><i><font color='green'> *  Coding: en_US.UTF-8.</font></i>
+<a name='L7'><i><font color='green'> * Summary:</font></i>
+<a name='L8'><i><font color='green'> * Last Change: 13-Sep-2013.</font></i>
+<a name='L9'><i><font color='green'> ****************************************/</font></i>
+<a name='L10'>
+<a name='L11'><font color='darkred'>#include</font> "<a href='6.html'>draw.h</a>"
+<a name='L12'><font color='darkred'>#include</font> "<a href='22.html'>land.h</a>"
+<a name='L13'><font color='darkred'>#include</font> "<a href='2.html'>signal.h</a>"
+<a name='L14'><font color='darkred'>#include</font>&lt;QRectF&gt;
+<a name='L15'><font color='darkred'>#include</font>&lt;QLineF&gt;
+<a name='L16'><font color='darkred'>#include</font>&lt;QPointF&gt;
+<a name='L17'><font color='darkred'>#include</font>&lt;QPainter&gt;
+<a name='L18'><font color='darkred'>#include</font>&lt;QTimer&gt;
+<a name='L19'><font color='darkred'>#include</font>&lt;QWidget&gt;
+<a name='L20'><font color='darkred'>#include</font>&lt;QVector&gt;
+<a name='L21'><font color='darkred'>#include</font>&lt;QDebug&gt;
+<a name='L22'><font color='darkred'>#include</font>&lt;QtCore/qmath.h&gt;
+<a name='L23'><font color='darkred'>#include</font>"<a href='17.html'>src/GA/population.h</a>"
+<a name='L24'><font color='darkred'>#include</font> "<a href='18.html'>src/GA/individual.h</a>"
+<a name='L25'><font color='darkred'>#include</font> "<a href='13.html'>src/GA/chromosome.h</a>"
+<a name='L26'><b>static</b> <b>const</b> <b>int</b> road_range = 5;
+<a name='L27'><b>inline</b> QPointF <a href='../S/5.html#L214' title='Refered from 214 in src/draw.cc.'>SignalPos</a>(<b>const</b> QLineF&amp; line)
+<a name='L28'><font color='red'>{</font>
+<a name='L29'>  <b>const</b> <b>int</b>     l   = 20;
+<a name='L30'>  QPointF       vec = line.p2()-line.p1();
+<a name='L31'>  QPointF       pos;
+<a name='L32'>  qreal         r;
+<a name='L33'>  r=-qAtan2(road_range,l);
+<a name='L34'>
+<a name='L35'>  vec/=vec.manhattanLength();
+<a name='L36'>  pos.rx()=line.p1().x()+(qSqrt(road_range*road_range/4+l*l)*(vec.x()*qCos(r)-vec.y()*qSin(r)));
+<a name='L37'>  pos.ry()=line.p1().y()+(qSqrt(road_range*road_range/4+l*l)*(vec.x()*qSin(r)+vec.y()*qCos(r)));
+<a name='L38'>  <b>return</b> pos;
+<a name='L39'><font color='red'>}</font>
+<a name='L40'><b>inline</b> qreal <a href='../R/46.html' title='Multiple refered from 4 places.'>len</a>(<b>const</b> QPointF&amp; p1,<b>const</b> QPointF&amp; p2)
+<a name='L41'><font color='red'>{</font>
+<a name='L42'>    QPointF d=p2-p1;
+<a name='L43'>    <b>return</b> qSqrt(qPow(d.x(),2)+qPow(d.y(),2));
+<a name='L44'><font color='red'>}</font>
+<a name='L45'><b>inline</b> <b>int</b> <a href='../S/5.html#L107' title='Refered from 107 in src/draw.cc.'>countGene</a>(QVector&lt;Signal&gt;&amp; signal)
+<a name='L46'><font color='red'>{</font>
+<a name='L47'>  <b>int</b> cnt = 0;
+<a name='L48'>  <b>for</b>(<b>auto</b> s:signal)
+<a name='L49'>    <font color='red'>{</font>
+<a name='L50'>      cnt+=s.<a href='../S/8.html#L36' title='Defined at 36 in src/signal.cc.'>size</a> ();
+<a name='L51'>    <font color='red'>}</font>
+<a name='L52'>  <b>return</b> cnt;
+<a name='L53'><font color='red'>}</font>
+<a name='L54'><b>inline</b> QPointF <a href='../S/5.html#L190' title='Refered from 190 in src/draw.cc.'>make_road_d</a>(<b>const</b> QLineF&amp; road)
+<a name='L55'><font color='red'>{</font>
+<a name='L56'>  QPointF d(road.dx(),road.dy());
+<a name='L57'>  d/=road.length();
+<a name='L58'>  <b>return</b> d*3;
+<a name='L59'><font color='red'>}</font>
+<a name='L60'>QVector&lt;QLineF&gt; <a href='../S/5.html#L109' title='Refered from 109 in src/draw.cc.'>multiline</a> (QHash&lt;<b>int</b>,QLineF&gt; l)
+<a name='L61'><font color='red'>{</font>
+<a name='L62'>  QVector&lt;QPair&lt;QLineF,<b>int</b>&gt; &gt; list;
+<a name='L63'>  QVector&lt;QLineF&gt;       tmp;
+<a name='L64'>  QLineF                line;
+<a name='L65'>  QPointF               diff;
+<a name='L66'>  <b>bool</b>                  flag;
+<a name='L67'>    <b>for</b> (<b>auto</b> r : l)
+<a name='L68'>    <font color='red'>{</font>
+<a name='L69'>      flag = <b>true</b>;
+<a name='L70'>      <b>for</b> ( <b>auto</b> i : list)
+<a name='L71'>        <b>if</b> ( i.first == r )
+<a name='L72'>          <font color='red'>{</font>
+<a name='L73'>            i.second++;
+<a name='L74'>            flag = <b>false</b>;
+<a name='L75'>            <b>break</b>;
+<a name='L76'>          <font color='red'>}</font>
+<a name='L77'>      <b>if</b>(flag)
+<a name='L78'>        list.<a href='../S/10.html#L60' title='Defined at 60 in src/GA/chromosome.cpp.'>push_back</a> (qMakePair (r,1));
+<a name='L79'>    <font color='red'>}</font>
+<a name='L80'>  <b>for</b> (<b>auto</b> i : list)
+<a name='L81'>    <font color='red'>{</font>
+<a name='L82'>      diff = QPointF(-i.first.dy(),i.first.dx());
+<a name='L83'>      QPointF diff2 = diff;
+<a name='L84'>      diff /= qSqrt(diff2.x()*diff2.x()+diff2.y()*diff2.y());
+<a name='L85'>      diff *=6;
+<a name='L86'>      <b>for</b> (<b>int</b> j=0;j&lt;i.second;j++)
+<a name='L87'>        <font color='red'>{</font>
+<a name='L88'>          line.setP1 (i.first.p1()+diff*(j+1));
+<a name='L89'>          line.setP2 (i.first.p2()+diff*(j+1));
+<a name='L90'>          tmp.<a href='../S/10.html#L60' title='Defined at 60 in src/GA/chromosome.cpp.'>push_back</a> (line);
+<a name='L91'>        <font color='red'>}</font>
+<a name='L92'>    <font color='red'>}</font>
+<a name='L93'>  <b>return</b> tmp;
+<a name='L94'><font color='red'>}</font>
+<a name='L95'>Draw::Draw(QString      filename,
+<a name='L96'>           <b>int</b>          car_number,
+<a name='L97'>           QString      img,
+<a name='L98'>           QWidget*     parent)
+<a name='L99'>  :QWidget(parent),
+<a name='L100'>   land(filename),
+<a name='L101'>   img(img),
+<a name='L102'>   car_number(car_number),
+<a name='L103'>   g_clock(0),
+<a name='L104'>   <a href='../R/44.html' title='Multiple refered from 9 places.'>index</a>(0)
+<a name='L105'><font color='red'>{</font>
+<a name='L106'>  <a href='../S/5.html#L118' title='Defined at 118 in src/draw.cc.'>InitCar</a>();
+<a name='L107'>  pop    = <b>new</b>  Population(<a href='../S/5.html#L45' title='Defined at 45 in src/draw.cc.'>countGene</a>(land.signal));
+<a name='L108'>  <a href='../S/5.html#L146' title='Defined at 146 in src/draw.cc.'>InitSignal</a>(*(pop-&gt;<a href='../D/31.html' title='Multiple defined in 3 places.'>begin</a>()));
+<a name='L109'>  map    = <a href='../S/5.html#L60' title='Defined at 60 in src/draw.cc.'>multiline</a>(land.road);
+<a name='L110'>  timer  = <b>new</b> QTimer();
+<a name='L111'>  timer-&gt;start(20);
+<a name='L112'>  connect(timer,SIGNAL(timeout()),<b>this</b>,SLOT(<a href='../S/5.html#L230' title='Defined at 230 in src/draw.cc.'>onTimer</a>()));
+<a name='L113'>  timer2 = <b>new</b> QTimer();
+<a name='L114'>  timer2-&gt;start(500);
+<a name='L115'>  connect(timer2,SIGNAL(timeout()),<b>this</b>,SLOT(<a href='../S/5.html#L280' title='Defined at 280 in src/draw.cc.'>onTimer2</a>()));
+<a name='L116'><font color='red'>}</font>
+<a name='L117'>
+<a name='L118'><b>void</b> Draw::<a href='../R/12.html' title='Multiple refered from 3 places.'>InitCar</a>()
+<a name='L119'><font color='red'>{</font>
+<a name='L120'>  <b>int</b> id;
+<a name='L121'>  <b>int</b> <a href='../S/8.html#L36' title='Defined at 36 in src/signal.cc.'>size</a>;
+<a name='L122'>  <b>this</b>-&gt;car.clear();
+<a name='L123'>  <b>for</b>(<b>int</b> i = 0 ; i&lt; car_number ; i++)
+<a name='L124'>    <font color='red'>{</font>
+<a name='L125'>      id = land.<a href='../S/20.html#L22' title='Defined at 22 in src/land.cc.'>get_random_id</a>();
+<a name='L126'>      Car tmp(id,land.road.value(id).p1());
+<a name='L127'>      tmp.<a href='../S/4.html#L57' title='Defined at 57 in src/car.cc.'>set_dest</a>(land.road[land.<a href='../S/20.html#L22' title='Defined at 22 in src/land.cc.'>get_random_id</a>()].p2());
+<a name='L128'>      <a href='../S/7.html#L35' title='Defined at 35 in src/navi.cc.'>SetDiff</a>(tmp,land.road[id]);
+<a name='L129'>      <a href='../S/8.html#L36' title='Defined at 36 in src/signal.cc.'>size</a> = qrand()%3;
+<a name='L130'>      tmp.<a href='../S/4.html#L82' title='Defined at 82 in src/car.cc.'>set_rect</a>(QRectF(0,0,<a href='../S/8.html#L36' title='Defined at 36 in src/signal.cc.'>size</a>+5,<a href='../S/8.html#L36' title='Defined at 36 in src/signal.cc.'>size</a>+5));
+<a name='L131'>      tmp.<a href='../S/4.html#L87' title='Defined at 87 in src/car.cc.'>set_speed</a>((qrand()%150)/100.0+0.9);
+<a name='L132'>      tmp.number = i;
+<a name='L133'>      qDebug()&lt;&lt;"+------Car_Generate-------";
+<a name='L134'>      qDebug()&lt;&lt;"|num  :"&lt;&lt;tmp.number;
+<a name='L135'>      qDebug()&lt;&lt;"|pos  :"&lt;&lt;tmp.<a href='../S/4.html#L27' title='Defined at 27 in src/car.cc.'>get_pos</a>();
+<a name='L136'>      qDebug()&lt;&lt;"|id   :"&lt;&lt;tmp.<a href='../S/4.html#L67' title='Defined at 67 in src/car.cc.'>get_road_id</a>();
+<a name='L137'>      qDebug()&lt;&lt;"|speed:"&lt;&lt;tmp.<a href='../S/4.html#L91' title='Defined at 91 in src/car.cc.'>get_speed</a>();
+<a name='L138'>      qDebug()&lt;&lt;"|size :"&lt;&lt;tmp.<a href='../S/4.html#L77' title='Defined at 77 in src/car.cc.'>get_rect</a>();
+<a name='L139'>      qDebug()&lt;&lt;"+-------------------------";
+<a name='L140'>      qDebug();
+<a name='L141'>      car.append(tmp);
+<a name='L142'>    <font color='red'>}</font>
+<a name='L143'>  CAR_SIZE=5;
+<a name='L144'><font color='red'>}</font>
+<a name='L145'>
+<a name='L146'><b>void</b> Draw::<a href='../R/13.html' title='Multiple refered from 3 places.'>InitSignal</a> (Individual&amp; indiv)
+<a name='L147'><font color='red'>{</font>
+<a name='L148'>  QVector&lt;<a href='../S/8.html#L15' title='Defined at 15 in src/signal.cc.'>Signal</a>&gt;::iterator     itr     = land.signal.<a href='../D/31.html' title='Multiple defined in 3 places.'>begin</a>();
+<a name='L149'>  QVector&lt;<a href='../S/13.html#L17' title='Defined at 17 in src/GA/chromosome.h.'>Gene</a>&gt;::iterator       pattern = indiv.<a href='../D/31.html' title='Multiple defined in 3 places.'>begin</a>();
+<a name='L150'>  <a href='../S/22.html#L19' title='Defined at 19 in src/land.h.'>RoadIterator</a> road;
+<a name='L151'>  <b>while</b> (itr!=land.signal.<a href='../D/34.html' title='Multiple defined in 2 places.'>end</a>())
+<a name='L152'>    <font color='red'>{</font>
+<a name='L153'>      qDebug()&lt;&lt;"+--------Signal_Generate---------";
+<a name='L154'>      qDebug()&lt;&lt;"|pos     :"&lt;&lt;itr-&gt;x()&lt;&lt;','&lt;&lt;itr-&gt;y();
+<a name='L155'>      <b>for</b> (road=land.road.<a href='../D/31.html' title='Multiple defined in 3 places.'>begin</a>(); road!=land.road.<a href='../D/34.html' title='Multiple defined in 2 places.'>end</a>(); ++road)
+<a name='L156'>        <font color='red'>{</font>
+<a name='L157'>          <b>if</b> (itr-&gt;x() == road.value().p1().x() &amp;&amp;
+<a name='L158'>              itr-&gt;y() == road.value().p1().y())
+<a name='L159'>            <font color='red'>{</font>
+<a name='L160'>              qDebug()&lt;&lt;"|connect :"&lt;&lt;road.key ();
+<a name='L161'>              qDebug()&lt;&lt;"|        :"&lt;&lt;road.value ();
+<a name='L162'>              qDebug()&lt;&lt;"|pattern :"&lt;&lt;*(pattern);
+<a name='L163'>              qDebug()&lt;&lt;"|        :";
+<a name='L164'>              itr-&gt;<a href='../S/8.html#L19' title='Defined at 19 in src/signal.cc.'>set_pattern</a> (road.key(),*pattern);
+<a name='L165'>              ++pattern;
+<a name='L166'>            <font color='red'>}</font>
+<a name='L167'>        <font color='red'>}</font>
+<a name='L168'>      qDebug()&lt;&lt;"+--------------------------------";
+<a name='L169'>      ++itr;
+<a name='L170'>    <font color='red'>}</font>
+<a name='L171'><font color='red'>}</font>
+<a name='L172'>
+<a name='L173'><b>void</b> Draw::<a href='../S/6.html#L33' title='Refered from 33 in src/draw.h.'>paintEvent</a> (QPaintEvent *)
+<a name='L174'><font color='red'>{</font>
+<a name='L175'>  QPainter      painter(<b>this</b>);
+<a name='L176'>  QRectF        rect_dest(0,0,10,10);
+<a name='L177'>  QRectF        rect_pos;
+<a name='L178'>  QLineF        line;
+<a name='L179'>  QPointF       d(0,0);
+<a name='L180'>  QPointF       p;
+<a name='L181'>  painter.setPen(Qt::gray);
+<a name='L182'>
+<a name='L183'>  <b>if</b>(img!="none")painter.drawImage(QPoint(5,-10),QImage(img));
+<a name='L184'>  <i><font color='green'>//Drawing Road</font></i>
+<a name='L185'>  painter.drawLines (<b>this</b>-&gt;map);
+<a name='L186'>  painter.setPen(Qt::black);
+<a name='L187'>  <i><font color='green'>//Drawing Car position and destination</font></i>
+<a name='L188'>  <b>for</b> (<b>auto</b> c : car)
+<a name='L189'>    <font color='red'>{</font>
+<a name='L190'>      d=<a href='../S/5.html#L54' title='Defined at 54 in src/draw.cc.'>make_road_d</a> (land.road [c.<a href='../S/4.html#L67' title='Defined at 67 in src/car.cc.'>get_road_id</a>()]);
+<a name='L191'>      rect_pos=c.<a href='../S/4.html#L77' title='Defined at 77 in src/car.cc.'>get_rect</a>();
+<a name='L192'>      rect_pos.moveCenter (c.<a href='../S/4.html#L27' title='Defined at 27 in src/car.cc.'>get_pos</a> () +QPointF(d.y(),-d.x())*road_range/2);
+<a name='L193'>      painter.drawRect(rect_pos);
+<a name='L194'>      rect_pos.moveCenter (c.<a href='../S/4.html#L62' title='Defined at 62 in src/car.cc.'>get_dest</a> ());
+<a name='L195'>      painter.drawRect(rect_pos);
+<a name='L196'>    <font color='red'>}</font>
+<a name='L197'>  painter.setPen(Qt::red);
+<a name='L198'>  <i><font color='green'>//Drawing Signal</font></i>
+<a name='L199'>  <b>for</b> (<b>auto</b> s : land.signal)
+<a name='L200'>    <font color='red'>{</font>
+<a name='L201'>      QMap&lt;<b>int</b>,QVector&lt;<b>bool</b>&gt; &gt;::iterator pattern;
+<a name='L202'>      <b>for</b>(pattern=s.<a href='../D/31.html' title='Multiple defined in 3 places.'>begin</a>(); pattern!=s.<a href='../D/34.html' title='Multiple defined in 2 places.'>end</a>(); ++pattern)
+<a name='L203'>        <font color='red'>{</font>
+<a name='L204'>          <b>if</b>(s.<a href='../S/8.html#L24' title='Defined at 24 in src/signal.cc.'>get_pattern</a>(pattern.key(),g_clock%8))
+<a name='L205'>            <font color='red'>{</font>
+<a name='L206'>              painter.setPen(Qt::blue);
+<a name='L207'>              painter.setBrush(Qt::blue);
+<a name='L208'>            <font color='red'>}</font>
+<a name='L209'>          <b>else</b>
+<a name='L210'>            <font color='red'>{</font>
+<a name='L211'>              painter.setPen(Qt::red);
+<a name='L212'>              painter.setBrush(Qt::red);
+<a name='L213'>            <font color='red'>}</font>
+<a name='L214'>          QPointF pos=<a href='../S/5.html#L27' title='Defined at 27 in src/draw.cc.'>SignalPos</a>(land.road[pattern.key()]);
+<a name='L215'>          painter.drawEllipse(pos.x()-3,pos.y()-3,6,6);
+<a name='L216'>        <font color='red'>}</font>
+<a name='L217'>    <font color='red'>}</font>
+<a name='L218'>  painter.setPen(Qt::black);
+<a name='L219'>  painter.setBrush(Qt::black);
+<a name='L220'><font color='red'>}</font>
+<a name='L221'>
+<a name='L222'><b>int</b> Draw::<a href='../R/7.html' title='Multiple refered from 2 places.'>Evaluate</a>()
+<a name='L223'><font color='red'>{</font>
+<a name='L224'>  <b>int</b> eval=0;
+<a name='L225'>  QVector&lt;Car&gt;::iterator car1;
+<a name='L226'>  <b>for</b>(car1=car.<a href='../D/31.html' title='Multiple defined in 3 places.'>begin</a>(); car1!=car.<a href='../D/34.html' title='Multiple defined in 2 places.'>end</a>(); ++car1)
+<a name='L227'>    <b>if</b>(car1-&gt;<a href='../S/4.html#L52' title='Defined at 52 in src/car.cc.'>get_diff</a>()==QPointF(0,0))eval++;
+<a name='L228'>  <b>return</b> 100-(<b>int</b>)(((<b>double</b>)eval/car.<a href='../S/8.html#L36' title='Defined at 36 in src/signal.cc.'>size</a>())*100);
+<a name='L229'><font color='red'>}</font>
+<a name='L230'><b>void</b> Draw::<a href='../R/51.html' title='Multiple refered from 2 places.'>onTimer</a>()
+<a name='L231'><font color='red'>{</font>
+<a name='L232'>  QLineF r;
+<a name='L233'>  <b>for</b> (<b>auto</b>&amp; c : car)
+<a name='L234'>    <font color='red'>{</font>
+<a name='L235'>      c.<a href='../S/4.html#L22' title='Defined at 22 in src/car.cc.'>moveTo</a> (c.<a href='../S/4.html#L27' title='Defined at 27 in src/car.cc.'>get_pos</a> () + c.<a href='../S/4.html#L52' title='Defined at 52 in src/car.cc.'>get_diff</a> ());
+<a name='L236'>      r = land.road [c.<a href='../S/4.html#L67' title='Defined at 67 in src/car.cc.'>get_road_id</a> ()];
+<a name='L237'>      <a href='../S/7.html#L35' title='Defined at 35 in src/navi.cc.'>SetDiff</a> (c,r);
+<a name='L238'>      <b>if</b> (<a href='../S/7.html#L75' title='Defined at 75 in src/navi.cc.'>Reach</a>(c,r))
+<a name='L239'>        <font color='red'>{</font>
+<a name='L240'>          c.<a href='../S/4.html#L22' title='Defined at 22 in src/car.cc.'>moveTo</a>(r.p2 ());
+<a name='L241'>          <b>if</b> (c.<a href='../S/4.html#L27' title='Defined at 27 in src/car.cc.'>get_pos</a> () == c.<a href='../S/4.html#L62' title='Defined at 62 in src/car.cc.'>get_dest</a> ())
+<a name='L242'>            <font color='red'>{</font>
+<a name='L243'>              c.<a href='../S/4.html#L57' title='Defined at 57 in src/car.cc.'>set_dest</a> (land.road [land.<a href='../S/20.html#L22' title='Defined at 22 in src/land.cc.'>get_random_id</a> ()].p2 ());
+<a name='L244'>              c.<a href='../S/4.html#L72' title='Defined at 72 in src/car.cc.'>Clear_log</a>();
+<a name='L245'>            <font color='red'>}</font>
+<a name='L246'>          <a href='../S/7.html#L42' title='Defined at 42 in src/navi.cc.'>SetNextRoad</a> (c);
+<a name='L247'>          r = land.road [c.<a href='../S/4.html#L67' title='Defined at 67 in src/car.cc.'>get_road_id</a> ()];
+<a name='L248'>          <a href='../S/7.html#L107' title='Defined at 107 in src/navi.cc.'>CheckSignal</a> (c,g_clock%8);
+<a name='L249'>        <font color='red'>}</font>
+<a name='L250'>      <b>if</b> (c.signal_stop)
+<a name='L251'>        <font color='red'>{</font>
+<a name='L252'>          <a href='../S/7.html#L107' title='Defined at 107 in src/navi.cc.'>CheckSignal</a> (c,g_clock%8);
+<a name='L253'>          
+<a name='L254'>        <font color='red'>}</font>
+<a name='L255'>      <a href='../S/7.html#L79' title='Defined at 79 in src/navi.cc.'>smartAssist</a>(c);
+<a name='L256'>    <font color='red'>}</font>
+<a name='L257'>
+<a name='L258'>  <b>if</b>(g_clock%10 == 0)
+<a name='L259'>    <font color='red'>{</font>
+<a name='L260'>
+<a name='L261'>      <b>int</b> eval;
+<a name='L262'>      pop-&gt;<a href='../D/29.html' title='Multiple defined in 2 places.'>at</a>(<a href='../S/5.html#L104' title='Defined at 104 in src/draw.cc.'>index</a>).<a href='../S/19.html#L22' title='Defined at 22 in src/GA/individual.cpp.'>setEval</a>(eval=<a href='../S/5.html#L222' title='Defined at 222 in src/draw.cc.'>Evaluate</a>());
+<a name='L263'>      evalChanged(eval);
+<a name='L264'>      <a href='../S/5.html#L104' title='Defined at 104 in src/draw.cc.'>index</a>++;
+<a name='L265'>      <b>if</b>(<a href='../S/5.html#L104' title='Defined at 104 in src/draw.cc.'>index</a>==9)
+<a name='L266'>        <font color='red'>{</font>
+<a name='L267'>          pop-&gt;<a href='../S/14.html#L12' title='Defined at 12 in src/GA/method.cc.'>method</a>();
+<a name='L268'>          <a href='../S/5.html#L104' title='Defined at 104 in src/draw.cc.'>index</a>=0;
+<a name='L269'>        <font color='red'>}</font>
+<a name='L270'>      qDebug()&lt;&lt;"NewSignal PATTERN";
+<a name='L271'>      <b>if</b>(<a href='../S/5.html#L104' title='Defined at 104 in src/draw.cc.'>index</a>&lt;9)
+<a name='L272'>        <font color='red'>{</font>
+<a name='L273'>          <a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a> tmp = pop-&gt;<a href='../D/29.html' title='Multiple defined in 2 places.'>at</a>(<a href='../S/5.html#L104' title='Defined at 104 in src/draw.cc.'>index</a>);
+<a name='L274'>          <a href='../S/5.html#L146' title='Defined at 146 in src/draw.cc.'>InitSignal</a>(tmp);
+<a name='L275'>        <font color='red'>}</font>
+<a name='L276'>      g_clock++;
+<a name='L277'>    <font color='red'>}</font>
+<a name='L278'>  update();
+<a name='L279'><font color='red'>}</font>
+<a name='L280'><b>void</b> Draw::<a href='../R/52.html' title='Multiple refered from 2 places.'>onTimer2</a>()
+<a name='L281'><font color='red'>{</font>
+<a name='L282'>  g_clock++;
+<a name='L283'><font color='red'>}</font>
+<a name='L284'><b>void</b> Draw::<a href='../R/56.html' title='Multiple refered from 2 places.'>reset</a>()
+<a name='L285'><font color='red'>{</font>
+<a name='L286'>  <a href='../S/5.html#L118' title='Defined at 118 in src/draw.cc.'>InitCar</a>();
+<a name='L287'>  <b>return</b>;
+<a name='L288'><font color='red'>}</font>
+<a name='L289'><b>void</b> Draw::<a href='../R/32.html' title='Multiple refered from 2 places.'>change_speed</a>(<b>int</b> speed)
+<a name='L290'><font color='red'>{</font>
+<a name='L291'>  timer-&gt;stop();
+<a name='L292'>  timer-&gt;start(speed);
+<a name='L293'>  <b>return</b>;
+<a name='L294'><font color='red'>}</font>
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L27'>[^]</a><a href='#L289'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

@@ -7,12 +7,11 @@
  * Summary:
  * Last Change: 12-Sep-2013.
  ****************************************/
-#ifndef DRAW_H
-#define DRAW_H
+#pragma once
 #include "src/land.h"
 #include "src/car.h"
 #include<QWidget>
-
+#include<QVector>
 #include"src/GA/population.h"
 #include "src/GA/individual.h"
 class Draw : public QWidget
@@ -47,6 +46,7 @@ private:
     //menber
     QTimer *timer,*timer2;
     Land land;
+    QVector<QLineF> map;
     const QString img;
     QVector<Car> car;
     const int car_number;
@@ -57,4 +57,4 @@ private:
     int CAR_SIZE;
     int CarNum;
 };
-#endif
+

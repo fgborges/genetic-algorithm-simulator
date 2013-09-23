@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>src/land.h</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/26.html'>src</a>/land.h</h2>
+<i><font color='green'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2><a href='../J/17.html' title='Multiple included from 4 places.'>INCLUDED FROM</a></h2>
+<hr>
+<pre>
+<a name='L1'><i><font color='green'>/****************************************</font></i>
+<a name='L2'><i><font color='green'> *  Author: MackRick.</font></i>
+<a name='L3'><i><font color='green'> *   Email: mack.sept.public@gmail.com.</font></i>
+<a name='L4'><i><font color='green'> *    File: land.h.</font></i>
+<a name='L5'><i><font color='green'> * Project: /home/mackrick/program/school/TMP.</font></i>
+<a name='L6'><i><font color='green'> *  Coding: en_US.UTF-8.</font></i>
+<a name='L7'><i><font color='green'> * Summary:</font></i>
+<a name='L8'><i><font color='green'> * Last Change: 10-Sep-2013.</font></i>
+<a name='L9'><i><font color='green'> ****************************************/</font></i>
+<a name='L10'><font color='darkred'>#pragma</font> once
+<a name='L11'>
+<a name='L12'><font color='darkred'>#include</font>&lt;QVector&gt;
+<a name='L13'><font color='darkred'>#include</font>&lt;QHash&gt;
+<a name='L14'><font color='darkred'>#include</font>&lt;QLineF&gt;
+<a name='L15'><font color='darkred'>#include</font>&lt;QString&gt;
+<a name='L16'><font color='darkred'>#include</font> "<a href='2.html'>signal.h</a>"
+<a name='L17'>
+<a name='L18'><i><font color='green'>//typedef QMap&lt;int,QLineF&gt;::iterator RoadIterator;</font></i>
+<a name='L19'><font color='darkred'>#define</font> <a href='../R/22.html' title='Multiple refered from 2 places.'>RoadIterator</a> QHash&lt;<b>int</b>,QLineF&gt;::iterator
+<a name='L20'>
+<a name='L21'><b>struct</b> <a href='../R/14.html' title='Multiple refered from 4 places.'>Land</a>
+<a name='L22'><font color='red'>{</font>
+<a name='L23'>    <a href='../D/14.html' title='Multiple defined in 2 places.'>Land</a>(<b>const</b> QString&amp; filename);
+<a name='L24'>    QHash&lt;<b>int</b>,QLineF&gt; road;
+<a name='L25'>    QVector&lt;<a href='../S/8.html#L15' title='Defined at 15 in src/signal.cc.'>Signal</a>&gt; signal;
+<a name='L26'>    <b>int</b> <a href='../S/20.html#L22' title='Defined at 22 in src/land.cc.'>get_random_id</a>()<b>const</b>;
+<a name='L27'><font color='red'>}</font>;
+<a name='L28'>
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

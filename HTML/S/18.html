@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>src/GA/individual.h</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/26.html'>src</a>/<a href='../files/27.html'>GA</a>/individual.h</h2>
+<i><font color='green'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2><a href='../J/6.html' title='Multiple included from 6 places.'>INCLUDED FROM</a></h2>
+<hr>
+<pre>
+<a name='L1'><i><font color='green'>/****************************************</font></i>
+<a name='L2'><i><font color='green'> *  Author: MackRick.</font></i>
+<a name='L3'><i><font color='green'> *   Email: mack.sept.public@gmail.com.</font></i>
+<a name='L4'><i><font color='green'> *    File: individual.h.</font></i>
+<a name='L5'><i><font color='green'> * Project: /home/mackrick/beta1/src/GA.</font></i>
+<a name='L6'><i><font color='green'> *  Coding: en_US.UTF-8.</font></i>
+<a name='L7'><i><font color='green'> * Summary: 個体クラスです。染色体クラスを</font></i>
+<a name='L8'><i><font color='green'> * 　　　　 継承し実際にアルゴリズムでは</font></i>
+<a name='L9'><i><font color='green'> * 　　　　 こちらからデータを操作してもら</font></i>
+<a name='L10'><i><font color='green'> * 　　　   もらうことになります。</font></i>
+<a name='L11'><i><font color='green'> * Last Change: 12-Sep-2013.</font></i>
+<a name='L12'><i><font color='green'> ****************************************/</font></i>
+<a name='L13'><font color='darkred'>#ifndef</font> <a href='../S/18.html#L14' title='Defined at 14 in src/GA/individual.h.'>INDIVIDUAL_H</a>
+<a name='L14'><font color='darkred'>#define</font> <a href='../S/18.html#L13' title='Refered from 13 in src/GA/individual.h.'>INDIVIDUAL_H</a>
+<a name='L15'><font color='darkred'>#include</font>"<a href='13.html'>chromosome.h</a>"
+<a name='L16'>class <a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a> : public <a href='../S/10.html#L17' title='Defined at 17 in src/GA/chromosome.cpp.'>Chromosome</a>
+<a name='L17'><font color='red'>{</font>
+<a name='L18'>        public:
+<a name='L19'>                <a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>(<b>int</b> num=0);
+<a name='L20'>                <b>int</b> <a href='../S/19.html#L17' title='Defined at 17 in src/GA/individual.cpp.'>getEval</a>()<b>const</b>;
+<a name='L21'>                <b>void</b> <a href='../S/19.html#L22' title='Defined at 22 in src/GA/individual.cpp.'>setEval</a>(<b>int</b>);
+<a name='L22'>                bool operator==(<b>const</b> <a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>&amp;)<b>const</b>;
+<a name='L23'>                bool operator&gt;(<b>const</b> <a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>&amp;)<b>const</b>;
+<a name='L24'>                bool operator&lt;(<b>const</b> <a href='../S/19.html#L12' title='Defined at 12 in src/GA/individual.cpp.'>Individual</a>&amp;)<b>const</b>;
+<a name='L25'>        private:
+<a name='L26'>                <b>int</b> eval;
+<a name='L27'><font color='red'>}</font>;
+<a name='L28'><font color='darkred'>#endif</font>
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

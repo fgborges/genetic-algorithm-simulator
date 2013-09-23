@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>src/main.cc</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/26.html'>src</a>/main.cc</h2>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L20'>[^]</a>[v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L20' title='Defined at 20.'>main</a>
+</ol>
+<hr>
+<pre>
+<a name='L1'><i><font color='green'>/****************************************</font></i>
+<a name='L2'><i><font color='green'> *  Author: MackRick.</font></i>
+<a name='L3'><i><font color='green'> *   Email: mack.sept.public@gmail.com.</font></i>
+<a name='L4'><i><font color='green'> *    File: main.cc.</font></i>
+<a name='L5'><i><font color='green'> * Project: /home/mackrick/beta1/src.</font></i>
+<a name='L6'><i><font color='green'> *  Coding: ja_JP.UTF-8.</font></i>
+<a name='L7'><i><font color='green'> * Summary:</font></i>
+<a name='L8'><i><font color='green'> * Last Change: 12-Sep-2013.</font></i>
+<a name='L9'><i><font color='green'> ****************************************/</font></i>
+<a name='L10'>
+<a name='L11'><font color='darkred'>#include</font>&lt;QWidget&gt;
+<a name='L12'><font color='darkred'>#include</font>"<a href='6.html'>draw.h</a>"
+<a name='L13'><font color='darkred'>#include</font>&lt;QApplication&gt;
+<a name='L14'><font color='darkred'>#include</font>&lt;iostream&gt;
+<a name='L15'><font color='darkred'>#include</font>&lt;cstdlib&gt;
+<a name='L16'><font color='darkred'>#include</font>&lt;QPushButton&gt;
+<a name='L17'><font color='darkred'>#include</font>&lt;QDial&gt;
+<a name='L18'><font color='darkred'>#include</font>&lt;QLCDNumber&gt;
+<a name='L19'>
+<a name='L20'><b>int</b> main(<b>int</b> argc,<b>char</b> **argv)
+<a name='L21'><font color='red'>{</font>
+<a name='L22'>    QApplication app(argc,argv);
+<a name='L23'>    Draw* draw;
+<a name='L24'>    QPushButton* resetButton = <b>new</b> QPushButton("reset");
+<a name='L25'>    QDial* dial = <b>new</b> QDial();
+<a name='L26'>    QLCDNumber* LCD=<b>new</b> QLCDNumber();
+<a name='L27'>    <b>if</b>(argc==4)draw = <b>new</b> Draw(argv[1],atoi(argv[2]),argv[3]);
+<a name='L28'>    <b>else</b> <b>if</b>(argc==3)draw = <b>new</b> Draw(argv[1],atoi(argv[2]));
+<a name='L29'>    <b>else</b> <b>if</b>(argc==2)draw = <b>new</b> Draw(argv[1]);
+<a name='L30'>    draw-&gt;show();
+<a name='L31'>    QObject::connect(resetButton,SIGNAL(clicked()),draw,SLOT(<a href='../S/5.html#L284' title='Defined at 284 in src/draw.cc.'>reset</a>()));
+<a name='L32'>    QObject::connect(dial,SIGNAL(valueChanged(<b>int</b>)),draw,SLOT(<a href='../S/5.html#L289' title='Defined at 289 in src/draw.cc.'>change_speed</a>(<b>int</b>)));
+<a name='L33'>    QObject::connect(draw,SIGNAL(evalChanged(<b>int</b>)),LCD,SLOT(display(<b>int</b>)));
+<a name='L34'>    resetButton-&gt;show();
+<a name='L35'>    dial-&gt;show();
+<a name='L36'>    LCD-&gt;show();
+<a name='L37'>    <b>return</b> app.exec();
+<a name='L38'><font color='red'>}</font>
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;][^]<a href='#L20'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

@@ -37,16 +37,6 @@ inline QPointF SignalPos(const QLineF& line)
   pos.ry()=line.p1().y()+(qSqrt(road_range*road_range/4+l*l)*(vec.x()*qSin(r)+vec.y()*qCos(r)));
   return pos;
 }
-inline QVector<QLineF> DoubleLine(const QLineF line)
-{
-  QVector<QLineF>	val;
-  const qreal		angle = qAtan(-1/(line.dy()/line.dx()));
-  const qreal		dx    = road_range*qCos(angle);
-  const qreal		dy    = road_range*qSin(angle);
-  val.append(QLineF(line.p1()-QPointF(dx,dy),line.p2()-QPointF(dx,dy)));
-  val.append(QLineF(line.p1()+QPointF(dx,dy),line.p2()+QPointF(dx,dy)));
-  return val;
-}
 inline qreal len(const QPointF& p1,const QPointF& p2)
 {
     QPointF d=p2-p1;
@@ -67,20 +57,56 @@ inline QPointF make_road_d(const QLineF& road)
   d/=road.length();
   return d*3;
 }
-
-Draw::Draw(QString filename,
-           int car_number,
-           QString img,
-           QWidget* parent)
+QVector<QLineF> multiline (QHash<int,QLineF> l)
+{
+  QVector<QPair<QLineF,int> > list;
+  QVector<QLineF>	tmp;
+  QLineF		line;
+  QPointF		diff;
+  bool			flag;
+    for (auto r : l)
+    {
+      flag = true;
+      for ( auto i : list)
+	if ( i.first == r )
+	  {
+	    i.second++;
+	    flag = false;
+	    break;
+	  }
+      if(flag)
+	list.push_back (qMakePair (r,1));
+    }
+  for (auto i : list)
+    {
+      diff = QPointF(-i.first.dy(),i.first.dx());
+      QPointF diff2 = diff;
+      diff /= qSqrt(diff2.x()*diff2.x()+diff2.y()*diff2.y());
+      diff *=6;
+      for (int j=0;j<i.second;j++)
+	{
+	  line.setP1 (i.first.p1()+diff*(j+1));
+ 	  line.setP2 (i.first.p2()+diff*(j+1));
+	  tmp.push_back (line);
+	}
+    }
+  return tmp;
+}
+Draw::Draw(QString	filename,
+           int		car_number,
+           QString	img,
+           QWidget*	parent)
   :QWidget(parent),
    land(filename),
    img(img),
    car_number(car_number),
-   g_clock(0),index(0)
+   g_clock(0),
+   index(0)
 {
   InitCar();
   pop	 = new  Population(countGene(land.signal));
   InitSignal(*(pop->begin()));
+  map	 = multiline(land.road);
   timer	 = new QTimer();
   timer->start(20);
   connect(timer,SIGNAL(timeout()),this,SLOT(onTimer()));
@@ -143,6 +169,7 @@ void Draw::InitSignal (Individual& indiv)
       ++itr;
     }
 }
+
 void Draw::paintEvent (QPaintEvent *)
 {
   QPainter	painter(this);
@@ -154,9 +181,10 @@ void Draw::paintEvent (QPaintEvent *)
   painter.setPen(Qt::gray);
 
   if(img!="none")painter.drawImage(QPoint(5,-10),QImage(img));
-  for (auto r : land.road)
-    painter.drawLines (DoubleLine (r));
+  //Drawing Road
+  painter.drawLines (this->map);
   painter.setPen(Qt::black);
+  //Drawing Car position and destination
   for (auto c : car)
     {
       d=make_road_d (land.road [c.get_road_id()]);
@@ -167,6 +195,7 @@ void Draw::paintEvent (QPaintEvent *)
       painter.drawRect(rect_pos);
     }
   painter.setPen(Qt::red);
+  //Drawing Signal
   for (auto s : land.signal)
     {
       QMap<int,QVector<bool> >::iterator pattern;

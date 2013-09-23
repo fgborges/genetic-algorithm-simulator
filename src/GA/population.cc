@@ -7,14 +7,14 @@
  * Summary:
  * Last Change: 12-Sep-2013.
  ****************************************/
-#include "src/GA/population.h"
+#include "population.h"
 Population::Population(int num)
   :gene_max(num),IndivNum(9),LossNum(9-3)
 {
   Individual *tmp;
   for(int i = 0;i<IndivNum;i++)
     {
-      tmp =  new Individual(num);
+      tmp = new Individual(num);
       indiv.push_back(*tmp);
       delete tmp;
     }
