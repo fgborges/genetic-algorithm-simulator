@@ -1,6 +1,6 @@
 /****************************************
  *  Author: MackRick.
-nnn *   Email: mack.sept.public@gmail.com.
+nnn *   Email: mack.sept.public@outlook.jp.
  *    File: chromosome.cpp.
  * Project: /home/mackrick/beta1/src/GA.
  *  Coding: ja_JP.UTF-8.

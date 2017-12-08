@@ -1,6 +1,6 @@
 /****************************************
  *  Author: MackRick.
- *   Email: mack.sept.public@gmail.com.
+ *   Email: mack.sept.public@outlook.jp.
  *    File: land.cc.
  * Project: /home/mackrick/program/school/TMP.
  *  Coding: en_US.UTF-8.

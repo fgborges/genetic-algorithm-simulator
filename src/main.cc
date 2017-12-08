@@ -1,6 +1,6 @@
 /****************************************
  *  Author: MackRick.
- *   Email: mack.sept.public@gmail.com.
+ *   Email: mack.sept.public@outlook.jp.
  *    File: main.cc.
  * Project: /home/mackrick/beta1/src.
  *  Coding: ja_JP.UTF-8.
